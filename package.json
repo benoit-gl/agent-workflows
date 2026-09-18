@@ -1,0 +1,14 @@
+{
+  "name": "agent-workflows",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0 <25"
+  },
+  "scripts": {
+    "format": "npm exec --yes --package=prettier@3.9.6 -- prettier --write .",
+    "format:check": "npm exec --yes --package=prettier@3.9.6 -- prettier --check .",
+    "links:check": "node scripts/check-markdown-links.mjs",
+    "check": "npm run format:check && npm run links:check"
+  }
+}
