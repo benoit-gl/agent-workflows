@@ -73,7 +73,9 @@ function reportMissing(sourceFile, rawTarget, issues) {
       .relative(root, sourceFile)
       .split(path.sep)
       .join("/");
-    issues.push(`${displaySource}: missing local Markdown target "${rawTarget}"`);
+    issues.push(
+      `${displaySource}: missing local Markdown target "${rawTarget}"`,
+    );
   }
 }
 
