@@ -90,8 +90,7 @@ for (const file of markdownFiles) {
     reportMissing(file, parseDestination(match[1] ?? ""), issues);
   }
 
-  const referenceDefinitions =
-    /^\s{0,3}\[[^\]]+\]:\s*(?:<([^>]+)>|(\S+))/gmu;
+  const referenceDefinitions = /^\s{0,3}\[[^\]]+\]:\s*(?:<([^>]+)>|(\S+))/gmu;
   for (const match of text.matchAll(referenceDefinitions)) {
     reportMissing(file, match[1] ?? match[2] ?? "", issues);
   }
