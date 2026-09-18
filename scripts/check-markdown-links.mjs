@@ -69,7 +69,10 @@ function reportMissing(sourceFile, rawTarget, issues) {
     relativeToRoot === ".." || relativeToRoot.startsWith(`..${path.sep}`);
 
   if (outsideRoot || !fs.existsSync(resolved)) {
-    const displaySource = path.relative(root, sourceFile).split(path.sep).join("/");
+    const displaySource = path
+      .relative(root, sourceFile)
+      .split(path.sep)
+      .join("/");
     issues.push(`${displaySource}: missing local Markdown target "${rawTarget}"`);
   }
 }
