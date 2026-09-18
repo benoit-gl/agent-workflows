@@ -5,7 +5,8 @@ evidence-based. Do not copy raw agent transcripts or large test logs into it.
 
 ## Authority and scope
 
-- Delivery mode: `review-only`, `local-fix`, `update-pr`, or `land-pr`
+- Delivery mode: `review-only`, `local-fix`, or `update-pr`
+- Local commit explicitly authorized: `yes` or `no`
 - Authorized actions:
 - Forbidden actions:
 - Base repository/ref/revision:
@@ -52,7 +53,7 @@ Finding statuses: `proposed`, `accepted`, `rejected`, `deferred`, `fixed`,
 
 - Baseline commands/results:
 - Post-fix commands/results:
-- Required remote checks and exact revision:
+- Required remote checks and authoritative check target:
 - Pre-existing or unrelated failures:
 
 ## Changed-path policy audit
@@ -64,12 +65,15 @@ Finding statuses: `proposed`, `accepted`, `rejected`, `deferred`, `fixed`,
 
 ## Delivery record
 
+- Reviewed state identity:
 - Commits created:
-- Remote fetched immediately before push:
+- Committed state identity matches reviewed state:
+- Remote base/head re-resolved immediately before push:
 - Normal pushes performed:
 - Current remote PR head:
+- Authoritative remote check target:
 - PR metadata/state changes:
-- Required checks on current head:
+- Required checks on authoritative target:
 
 ## Current disposition
 

@@ -15,16 +15,17 @@ and acceptance criteria. An `AGENTS.md` file is not required.
 
 Record one delivery mode before review work begins:
 
-| Mode          | Edit | Commit   | Push                  | Merge                           |
-| ------------- | ---- | -------- | --------------------- | ------------------------------- |
-| `review-only` | no   | no       | no                    | no                              |
-| `local-fix`   | yes  | optional | no                    | no                              |
-| `update-pr`   | yes  | yes      | existing PR head only | no                              |
-| `land-pr`     | yes  | yes      | yes                   | only when explicitly authorized |
+| Mode          | Edit | Commit        | Push                  | Merge |
+| ------------- | ---- | ------------- | --------------------- | ----- |
+| `review-only` | no   | no            | no                    | no    |
+| `local-fix`   | yes  | explicit only | no                    | no    |
+| `update-pr`   | yes  | yes           | existing PR head only | no    |
 
 - A plain request to review code selects `review-only` and means one read-only
   pass unless the user explicitly requests the iterative fixing loop.
-- A request to fix locally selects `local-fix`.
+- A request to fix locally selects `local-fix`. It authorizes worktree edits, not
+  commits. A local commit requires separate explicit authorization recorded in
+  the state file.
 - A request to update, repair, or push fixes to an existing PR selects
   `update-pr` only when pushing is explicit.
 - A prohibition such as "do not merge" does not by itself authorize commits or
@@ -32,14 +33,14 @@ Record one delivery mode before review work begins:
 - Approval to push does not authorize force-push, approval, closing, enabling
   auto-merge, changing draft/ready-for-review status, labels, milestones, base
   branch, or other PR metadata.
-- `land-pr` requires positive merge authorization. Never infer it from "finish,"
-  "complete," or "make it ready."
+- This workflow never merges a PR. Merge remains a separate user or repository
+  operation outside these delivery modes.
 - If the requested loop requires a write or remote action whose mode is unclear,
   ask once before taking that action. Record authorized and forbidden actions.
 
-For `update-pr` or `land-pr`, resolve the PR's base repository/ref, head
-repository/ref, and current head SHA from authoritative remote metadata. Confirm
-that the head repository is writable. Fetch immediately before work and before
+For `update-pr`, resolve the PR's base repository/ref, head repository/ref, and
+current head SHA from authoritative remote metadata. Confirm that the head
+repository is writable. Fetch immediately before work and before
 every push. Never review or push from a stale detached checkout merely because it
 was once based on the PR branch.
 
@@ -47,9 +48,11 @@ was once based on the PR branch.
 
 Perform bounded, path-scoped instruction discovery before classifying findings:
 
-1. Read the target repository's root contribution entry point when present:
-   `CONTRIBUTING*`, then the root `README*`. Read root `GOVERNANCE*` or
-   `SECURITY*` when the changed surface makes it relevant.
+1. Read the target repository's root `README*` and inspect the hosting platform's
+   conventional repository-policy locations once. On GitHub, inspect supported
+   root, `.github/`, and `docs/` locations for `CONTRIBUTING*`, `SECURITY*`, and
+   `CODEOWNERS`, applying GitHub's precedence when more than one candidate
+   exists. Read root `GOVERNANCE*` when present.
 2. For every changed path, walk its ancestor directories from repository root to
    the containing directory. Read any `README*`, `CONTRIBUTING*`, or
    `GOVERNANCE*` document encountered. Deduplicate documents shared by paths.
@@ -173,26 +176,38 @@ The coordinator must validate and deduplicate findings before any edit.
 4. Spawn a fresh `pr_reviewer` for a blind review of the current complete diff.
 5. Triage new findings and reopen failed fixes. Start another fix round only for
    accepted P0-P2 findings.
+6. When the local state passes these checks, record an identity for the exact
+   reviewed content, such as its tree or complete diff, for comparison after any
+   authorized commit.
 
 ## 6. Commit, push, and remote verification
 
-Apply this section only to delivery modes that authorize the corresponding
-actions.
+Apply commit steps only when commit authority is explicit. Apply push and remote
+verification steps only to `update-pr`.
 
 1. After local verification, policy audit, and fresh re-review succeed, create
-   scoped commits in the authorized worktree or branch.
-2. Re-fetch the remote PR head immediately before pushing. If it moved, reconcile
-   deliberately and repeat affected checks. Do not overwrite it.
-3. Push normally to the recorded existing PR head branch. Never force-push unless
+   scoped commits only when authorized.
+2. Compare the committed tree or complete committed diff with the recorded
+   reviewed content. If staging, a commit hook, or any other step changed content
+   or added paths, repeat the affected policy audit, verification, and re-review
+   before delivery.
+3. For `update-pr`, re-resolve both the remote PR base and head immediately before
+   pushing. If the head moved, reconcile deliberately and repeat affected checks;
+   do not overwrite it. If the base moved, repeat checks whose result depends on
+   the base or merge result before declaring convergence.
+4. Push normally to the recorded existing PR head branch. Never force-push unless
    the user explicitly authorizes that exact operation after seeing why it is
    needed.
-4. Record the pushed SHA. Confirm that remote PR metadata still points to that
-   SHA and that prohibited PR state did not change.
-5. Wait for required remote checks on that exact SHA. Triage failures; do not call
-   a local check an equivalent substitute for a required remote check.
-6. `update-pr` stops with an updated, verified PR. It never approves or merges.
-   `land-pr` may merge only after every stop condition passes and the user has
-   explicitly authorized merging.
+5. Record the pushed head SHA. Confirm that remote PR metadata still points to
+   that SHA and that prohibited PR state did not change. Re-resolve the current
+   base and head before final remote verification.
+6. Determine the authoritative required-check target from current host and
+   repository metadata. Do not assume required checks attach to the PR head SHA;
+   for example, GitHub checks can apply to a current PR test-merge or merge-queue
+   revision. Record the exact target and wait for its required checks. Triage
+   failures; do not substitute a local check for a required remote check.
+7. `update-pr` stops with an updated, verified PR. It never approves, changes PR
+   lifecycle state, enables auto-merge, or merges.
 
 ## 7. Stop conditions
 
@@ -204,8 +219,9 @@ Declare convergence only when:
 - the changed-path policy audit passes;
 - one fresh broad review finds no new actionable P0-P2 issue;
 - the user has made every required material decision; and
-- for `update-pr` or `land-pr`, the exact pushed SHA is the current PR head and
-  its required remote checks pass.
+- for `update-pr`, the recorded pushed head SHA is still the current PR head, the
+  current base/head pair has been re-resolved, and required remote checks pass on
+  the authoritative check target for that current PR state.
 
 Default to at most three broad review rounds. Stop earlier when converged. If the
 bound, budget, or practical context limit is reached, report open findings and
@@ -226,8 +242,8 @@ human approval, CI, branch protection, domain review, or security review.
   usage data.
 - Optimize for confirmed actionable findings and escaped-defect reduction, not
   raw finding count.
-- The final report states: delivery mode, convergence status, reviewed base/head
-  and pushed SHA when applicable, governance sources consulted, accepted and
-  rejected findings, user decisions, changes made, commits and remote actions,
-  verification evidence, remaining risks, known failures, rounds, and available
-  cost metrics.
+- The final report states: delivery mode, convergence status, reviewed base/head,
+  reviewed-content identity, pushed head SHA and authoritative remote check target
+  when applicable, governance sources consulted, accepted and rejected findings,
+  user decisions, changes made, commits and remote actions, verification evidence,
+  remaining risks, known failures, rounds, and available cost metrics.

@@ -22,13 +22,16 @@ For local fixes only:
 
 > Run the iterative PR review protocol from `benoit-gl/agent-workflows` on the
 > current branch versus `<base>`. Use `local-fix` delivery and include
-> `<whether uncommitted changes are in scope>`. Do not push or merge.
+> `<whether uncommitted changes are in scope>`. Do not commit or push unless I
+> separately authorize a local commit.
 
 The workflow automatically performs bounded discovery of ordinary target
-repository documentation. Callers should not have to repeat "read applicable
-documentation" in each request. Repository-specific policy remains in human
-documents such as `CONTRIBUTING.md` and path-scoped `README.md` files; an
-`AGENTS.md` file is not required.
+repository documentation, including conventional host locations for contribution,
+security, and ownership policy. On GitHub this includes the supported root,
+`.github/`, and `docs/` locations for `CONTRIBUTING*`, `SECURITY*`, and
+`CODEOWNERS`, with the host's precedence rules applied. Callers should not have to
+repeat "read applicable documentation" in each request. An `AGENTS.md` file is
+not required.
 
 For a small, localized PR, `gpt-5.6-terra` at medium effort is an economical
 coordinator. For a high-risk PR, use `gpt-5.6-sol` and raise effort only when
@@ -50,9 +53,12 @@ During an exercise, confirm that:
    shape.
 8. A changed-path policy audit, integration checks, and a fresh broad re-review
    occur before commit or push.
-9. `update-pr` uses a normal push to the existing PR head, records the pushed
-   SHA, and waits for required checks on that exact SHA without changing PR state.
-10. The final report states whether the loop converged and never equates a clean
+9. After a commit is created, its content is checked against the reviewed state;
+   staging mistakes, hook rewrites, or extra paths trigger affected checks again.
+10. `update-pr` uses a normal push to the existing PR head, records the pushed
+    head SHA, re-resolves the current base and head, and verifies required checks
+    on the host's authoritative check target without changing PR state.
+11. The final report states whether the loop converged and never equates a clean
     model response with proof.
 
 Keep the state directory untracked. Prefer a local Git exclude such as

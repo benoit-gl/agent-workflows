@@ -14,10 +14,12 @@ The initial workflow provides an iterative review-until-converged protocol:
 - `.agents/pr-reviews/README.md` describes how to invoke and exercise the workflow.
 
 The protocol discovers ordinary human-facing target-repository governance,
-requires findings to cite their governing invariants, distinguishes local review
-from PR update and merge authority, and verifies the exact pushed revision when
-remote delivery is requested. Target repositories do not need agent-specific
-instruction files.
+including conventional host policy locations, and requires findings to cite their
+governing invariants. It distinguishes read-only review, local fixes, and PR
+update authority; binds reviewed content to the committed and pushed head; and
+verifies required remote checks on the host's authoritative check target. It does
+not merge PRs, and target repositories do not need agent-specific instruction
+files.
 
 ## Usage
 
