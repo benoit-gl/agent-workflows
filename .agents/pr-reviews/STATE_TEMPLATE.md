@@ -1,32 +1,46 @@
 # PR Review State: <branch or PR>
 
-This is the durable control record for one iterative review. Keep it concise and evidence-based. Do not copy raw agent transcripts or large test logs into it.
+This is the durable control record for one iterative review. Keep it concise and
+evidence-based. Do not copy raw agent transcripts or large test logs into it.
 
-## Scope
+## Authority and scope
 
-- Base revision:
-- Head revision:
+- Delivery mode: `review-only`, `local-fix`, `update-pr`, or `land-pr`
+- Authorized actions:
+- Forbidden actions:
+- Base repository/ref/revision:
+- Head repository/ref/revision:
+- Last pushed revision, if any:
 - Working-tree changes included:
 - Requested behavior:
 - Acceptance criteria:
 - Risk level and reasons:
 - State last checked against revision:
 
+## Applicable governance
+
+| Path or scope | Governing document | Revision read | Applicable invariant |
+| ------------- | ------------------ | ------------- | -------------------- |
+|               |                    |               |                      |
+
+Record `none found` rather than leaving this section ambiguous.
+
 ## Decisions
 
-| ID    | Status   | Decision or invariant | Rationale | Source/date |
-| ----- | -------- | --------------------- | --------- | ----------- |
-| D-001 | accepted |                       |           |             |
+| ID    | Status   | Decision or invariant | Alternatives considered | Rationale | Source/date |
+| ----- | -------- | --------------------- | ----------------------- | --------- | ----------- |
+| D-001 | accepted |                       |                         |           |             |
 
 Statuses: `pending`, `accepted`, `superseded`.
 
 ## Findings
 
-| ID/fingerprint                           | Severity | Status   | Location | Trigger and consequence | Evidence | Decision/fix | Verification |
-| ---------------------------------------- | -------- | -------- | -------- | ----------------------- | -------- | ------------ | ------------ |
-| F-001 `<behavior>:<component>:<trigger>` | P2       | proposed |          |                         |          |              |              |
+| ID/fingerprint                           | Severity | Status   | Observation and evidence | Governing source or invariant | Interpretation and consequence | Alternatives or required decision | Fix | Verification |
+| ---------------------------------------- | -------- | -------- | ------------------------ | ----------------------------- | ------------------------------ | --------------------------------- | --- | ------------ |
+| F-001 `<behavior>:<component>:<trigger>` | P2       | proposed |                          |                               |                                |                                   |     |              |
 
-Finding statuses: `proposed`, `accepted`, `rejected`, `deferred`, `fixed`, `verified`, `reopened`, `stale`.
+Finding statuses: `proposed`, `accepted`, `rejected`, `deferred`, `fixed`,
+`verified`, `reopened`, `stale`.
 
 ## Rounds
 
@@ -38,11 +52,29 @@ Finding statuses: `proposed`, `accepted`, `rejected`, `deferred`, `fixed`, `veri
 
 - Baseline commands/results:
 - Post-fix commands/results:
+- Required remote checks and exact revision:
 - Pre-existing or unrelated failures:
+
+## Changed-path policy audit
+
+- Final changed paths:
+- Governance discovery repeated:
+- Newly applicable sources:
+- Hunk-to-invariant audit result:
+
+## Delivery record
+
+- Commits created:
+- Remote fetched immediately before push:
+- Normal pushes performed:
+- Current remote PR head:
+- PR metadata/state changes:
+- Required checks on current head:
 
 ## Current disposition
 
-- Convergence status: `not started`, `reviewing`, `awaiting decision`, `fixing`, `verifying`, `converged`, or `stopped with open work`
+- Convergence status: `not started`, `reviewing`, `awaiting decision`, `fixing`,
+  `verifying`, `awaiting remote checks`, `converged`, or `stopped with open work`
 - Open P0-P2 findings:
 - Pending user decisions:
 - Next action:

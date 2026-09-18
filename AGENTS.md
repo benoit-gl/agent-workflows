@@ -22,11 +22,15 @@
 ## Iterative PR review
 
 - When the user requests an iterative PR review, review-until-converged workflow, or the repository review protocol, read and follow `.agents/pr-reviews/WORKFLOW.md` before starting.
+- Let that workflow discover repository-specific policy from ordinary human-facing contribution and path-scoped documentation. Do not require a target repository to contain agent-specific instruction files.
+- Record a delivery mode before work begins. Review, local editing, pushing to an existing PR, and merging are distinct authorities; never infer a stronger authority from a weaker request.
 - Keep the primary agent as coordinator and decision owner. Use fresh subagent contexts for broad review rounds so earlier hypotheses do not anchor later reviews.
 - Preserve requirements, accepted user decisions, and verified facts in the review state file. Do not rely on chat history to carry them between rounds or invocations.
 - Reviewers are read-only. Use only one source-code writer at a time, and give the writer only accepted findings and recorded decisions.
 - Use the standard low-cost path first: one general reviewer, one fixer when needed, targeted verification, and one fresh re-review. Add focused reviewers or stronger models only for matching risk signals or unresolved uncertainty.
 - Keep the user in the loop for materially different valid fixes, public behavior or API changes, security tradeoffs, irreversible migrations, conflicting requirements, or substantial scope expansion. Record the user's choice before fixing.
+- Require each accepted P0-P2 finding to distinguish observation from its governing source or invariant and the interpretation connecting it to a consequence.
+- Before committing or pushing, repeat path-scoped policy discovery for the final changed paths and audit the diff against the recorded invariants.
 - Do not treat a clean model review as sufficient evidence. Require proportionate deterministic checks and preserve human ownership of final acceptance and merge.
 - A plain request to review code means one read-only review pass. Do not start the iterative fixing workflow or modify files unless the user requests it.
 
