@@ -13,11 +13,21 @@ The initial workflow provides an iterative review-until-converged protocol:
 - `.agents/pr-reviews/STATE_TEMPLATE.md` provides a compact control record for one review.
 - `.agents/pr-reviews/README.md` describes how to invoke and exercise the workflow.
 
+The protocol discovers ordinary human-facing target-repository governance,
+including conventional host policy locations, and requires findings to cite their
+governing invariants. It distinguishes read-only review, local fixes, and PR
+update authority; binds reviewed content to the committed and pushed head; and
+verifies required remote checks on the host's authoritative check target. It does
+not merge PRs, and target repositories do not need agent-specific instruction
+files.
+
 ## Usage
 
 Run the agent from the target repository and explicitly reference this workflow when the agent does not load remote instructions automatically. For example:
 
-> Review PR 19 using the PR review workflow from `benoit-gl/agent-workflows`. Treat the target repository's own instructions as authoritative for repository-specific policy.
+> Review PR 19 using the PR review workflow from `benoit-gl/agent-workflows`.
+> Use `update-pr` delivery: apply accepted fixes, commit them, and push normally
+> to the existing PR head. Do not force-push, change PR state, or merge.
 
 The workflow may create local review state under `.agents/pr-reviews/state/` in the target working tree. Keep that state untracked. Prefer a local Git exclude such as `.git/info/exclude` when the target repository does not already ignore the path.
 
