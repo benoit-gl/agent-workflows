@@ -96,6 +96,13 @@ it.
 
 ## 2. Choose the least-cost review path
 
+Each broad review is a first-principles assessment of the current PR. Reconstruct
+the PR's purpose and design from the current repository state, and ask whether
+the PR is good as a whole. Treat the required review dimensions as prompts for
+investigation, not as an exhaustive checklist. Look for any material defect,
+inconsistency, unjustified design choice, incomplete propagation, or other reason
+the current PR should not be accepted.
+
 - **Low or medium risk:** spawn one fresh `pr_reviewer` for a broad read-only
   review.
 - **High risk:** start with `pr_reviewer`, then use `pr_risk_reviewer` only for
