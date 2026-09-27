@@ -351,10 +351,22 @@ human approval, CI, branch protection, domain review, or security review.
 
 ## 8. Cost and final report
 
-- Use supported models and effort settings suited to the task. Prefer a capable
-  general reviewer and economical routine execution; escalate only an uncertain
-  or high-risk subtask. Runtime/user model preferences are configuration, not
-  workflow prerequisites. Record necessary substitutions and their reason.
+- Use these cost-conscious defaults when they are available:
+
+  | Work                                            | Default                 | Escalate when                                                                                                                                               |
+  | ----------------------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  | Inventory, extraction, and routine verification | `gpt-5.6-luna`, medium  | Results are inconclusive or require substantial reasoning.                                                                                                  |
+  | General review and ordinary fixing              | `gpt-5.6-terra`, medium | A specific finding crosses modules or semantic contracts, or remains disputed after validation.                                                             |
+  | Difficult targeted analysis                     | `gpt-5.6-sol`, high     | A serious architecture, security, correctness, data-loss, concurrency, migration, or compatibility question remains unresolved after focused investigation. |
+  | Exceptional reconciliation                      | `gpt-6-astra`, low      | Targeted analysis still leaves consequential architecture, security, or debugging ambiguity.                                                                |
+
+- Escalate only the affected subtask. Do not repeat settled work on the stronger
+  model, and return later routine work to the default path. Risk classification
+  alone does not require escalation: first identify the unresolved reasoning that
+  the cheaper path could not settle.
+- Runtime and user model preferences remain configuration rather than workflow
+  prerequisites. If a named model or effort is unavailable, select the closest
+  supported option and record the substitution and reason.
 - When available, record models, effort, rounds, accepted and rejected findings,
   retries, token or paid-tool usage, latency, and rework. Never invent unavailable
   usage data.
