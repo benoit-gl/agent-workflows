@@ -29,7 +29,8 @@ can include:
 - `AGENTS.md` for top-level agent rules;
 - `.agents/pr-reviews/WORKFLOW.md` for workflow semantics;
 - `.agents/pr-reviews/STATE_TEMPLATE.md` for durable review state;
-- `.agents/pr-reviews/README.md` for invocation and exercise guidance; and
+- `.agents/pr-reviews/README.md` for invocation and exercise guidance;
+- `.agents/pr-reviews/EXERCISES.md` for affected behavioral scenarios; and
 - `README.md` for repository-level usage and scope.
 
 Update only artifacts whose meaning changes. Do not duplicate a rule into
