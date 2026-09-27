@@ -5,11 +5,15 @@ evidence-based. Do not copy raw agent transcripts or large test logs into it.
 
 ## Authority and scope
 
+- Workflow source/revision:
+- Environment adapter and revision/content identity, if any:
+- Confirmed capabilities, missing facilities, and substitutions:
 - Delivery mode: `review-only`, `local-fix`, or `update-pr`
 - Local commit explicitly authorized: `yes` or `no`
 - Authorized actions:
 - Forbidden actions:
 - Base repository/ref/revision:
+- Comparison baseline and method:
 - Head repository/ref/revision:
 - Last pushed revision, if any:
 - Working-tree changes included:
@@ -45,9 +49,12 @@ Finding statuses: `proposed`, `accepted`, `rejected`, `deferred`, `fixed`,
 
 ## Rounds
 
-| Round | Agent/model/effort | Scope        | Result | Checks | Cost/latency if available |
-| ----- | ------------------ | ------------ | ------ | ------ | ------------------------- |
-| 1     |                    | broad review |        |        |                           |
+| Round | Agent/model/effort | Base/head and candidate identity | Brief/isolation method | Scope and coverage limits | Result/evidence | Cost/latency if available |
+| ----- | ------------------ | -------------------------------- | ---------------------- | ------------------------- | --------------- | ------------------------- |
+| 1     |                    |                                  |                        |                           |                 |                           |
+
+- Broad round limit (includes initial and final broad reviews):
+- Delegated tasks: scope/owner/permissions, expected output, status, evidence:
 
 ## Baseline and integration checks
 
@@ -55,6 +62,16 @@ Finding statuses: `proposed`, `accepted`, `rejected`, `deferred`, `fixed`,
 - Post-fix commands/results:
 - Required remote checks and authoritative check target:
 - Pre-existing or unrelated failures:
+
+Bind each result to its tested content identity. Record `pass`, `fail`, `blocked`,
+or `not applicable`, with evidence; baseline success does not verify later edits.
+
+## Semantic propagation
+
+- Changed contracts:
+- Unchanged consumers and active documents inspected:
+- Historical material and applicable lifecycle policy:
+- Coverage gaps or inconsistent semantics:
 
 ## Changed-path policy audit
 
@@ -67,6 +84,7 @@ Finding statuses: `proposed`, `accepted`, `rejected`, `deferred`, `fixed`,
 
 - Reviewed state identity:
 - Commits created:
+- Delivery revision (pushed or unchanged reviewed head):
 - Committed state identity matches reviewed state:
 - Remote base/head re-resolved immediately before push:
 - Normal pushes performed:
@@ -77,9 +95,13 @@ Finding statuses: `proposed`, `accepted`, `rejected`, `deferred`, `fixed`,
 
 ## Current disposition
 
-- Convergence status: `not started`, `reviewing`, `awaiting decision`, `fixing`,
-  `verifying`, `awaiting remote checks`, `converged`, or `stopped with open work`
+- Current stage:
+- Task status: `not started`, `in progress`, `awaiting decision`, `blocked`,
+  `complete`, or `stopped with open work`
+- Solution convergence: `not established` or `converged`
+- Blocked stages and invalidated evidence:
 - Open P0-P2 findings:
 - Pending user decisions:
 - Next action:
 - Remaining risks:
+- Resume checkpoint (instruction revision, content identity, evidence locations):

@@ -1,65 +1,43 @@
-# Testing the PR Review Protocol
+# Using the PR Review Workflow
 
-Start a fresh agent session at the target repository root. Explicitly name the
-requested delivery outcome.
+Read [WORKFLOW.md](WORKFLOW.md) for process rules. Use
+[STATE_TEMPLATE.md](STATE_TEMPLATE.md) for the control record and
+[EXERCISES.md](EXERCISES.md) to evaluate behavior.
 
-For a read-only iterative review:
+## Invocation examples
 
-> Run the iterative PR review protocol from `benoit-gl/agent-workflows` on PR
-> `<number>`. Use `review-only` delivery. Do not edit, commit, push, or change PR
-> state.
+Read-only review:
 
-For an updated but unmerged PR:
+> Review PR `<number>` in `<owner/repository>` using the PR review workflow
+> from `benoit-gl/agent-workflows`. Use `review-only` delivery.
+> Do not edit, commit, push, or change PR state.
 
-> Run the iterative PR review protocol from `benoit-gl/agent-workflows` on PR
-> `<number>`. Use `update-pr` delivery: work from the current PR head, apply
-> accepted fixes, commit them, and push normally to that same head branch so CI
-> runs. Do not force-push, approve, close, enable auto-merge, change draft status,
-> or merge. Ask before selecting among materially different valid contract, API,
-> security, or migration resolutions.
+A normal read-only review is one broad pass. Request repeated read-only rounds
+explicitly if needed. Findings can remain unresolved when the review is complete.
 
-For local fixes only:
+Update an existing PR:
 
-> Run the iterative PR review protocol from `benoit-gl/agent-workflows` on the
-> current branch versus `<base>`. Use `local-fix` delivery and include
-> `<whether uncommitted changes are in scope>`. Do not commit or push unless I
-> separately authorize a local commit.
+> Run the iterative PR review workflow from `benoit-gl/agent-workflows` on PR
+> `<number>` in `<owner/repository>`. Use `update-pr` delivery: apply accepted
+> fixes, commit them, and push normally to its existing head branch.
+> Do not force-push, approve, close, enable auto-merge, change PR state, or merge.
 
-The workflow automatically performs bounded discovery of ordinary target
-repository documentation, including conventional host locations for contribution,
-security, and ownership policy. On GitHub this includes the supported root,
-`.github/`, and `docs/` locations for `CONTRIBUTING*`, `SECURITY*`, and
-`CODEOWNERS`, with the host's precedence rules applied. Callers should not have to
-repeat "read applicable documentation" in each request. An `AGENTS.md` file is
-not required.
+Local fixes:
 
-For a small, localized PR, `gpt-5.6-terra` at medium effort is an economical
-coordinator. For a high-risk PR, use `gpt-5.6-sol` and raise effort only when
-triage or reconciliation is genuinely difficult. Reserve `gpt-6-astra` for
-exceptional architecture, security, or debugging ambiguity.
+> Run the iterative PR review workflow from `benoit-gl/agent-workflows` on the
+> current branch against `<base>`. Use `local-fix` delivery and
+> `<include/exclude>` uncommitted changes. Do not commit or push.
 
-During an exercise, confirm that:
+## Environment setup
 
-1. The coordinator records delivery mode, authorized actions, exact refs, and
-   remote state in `.agents/pr-reviews/state/`.
-2. It reads the root contribution entry point and path-scoped governance for
-   every changed path, then records concise sourced invariants.
-3. Every accepted P0-P2 finding separates observation, governing invariant,
-   interpretation, alternatives, and decision needs.
-4. Broad review rounds use fresh, read-only reviewers.
-5. Only one fixer changes source, and only after findings are accepted.
-6. Material choices are presented to the user and recorded before fixing.
-7. Verifiers check governing invariants rather than merely the intended patch
-   shape.
-8. A changed-path policy audit, integration checks, and a fresh broad re-review
-   occur before commit or push.
-9. After a commit is created, its content is checked against the reviewed state;
-   staging mistakes, hook rewrites, or extra paths trigger affected checks again.
-10. `update-pr` uses a normal push to the existing PR head, records the pushed
-    head SHA, re-resolves the current base and head, and verifies required checks
-    on the host's authoritative check target without changing PR state.
-11. The final report states whether the loop converged and never equates a clean
-    model response with proof.
+Use a checkout of the target repository when available. An environment adapter
+may specify another source-access route and state location. It must identify
+unsupported steps and any loss of review isolation.
 
-Keep the state directory untracked. Prefer a local Git exclude such as
-`.git/info/exclude` when the target repository does not already ignore it.
+Keep process state untracked; prefer the checkout's local Git exclude. Load the
+workflow and template at one recorded revision. Model and runtime choices belong
+to the invocation or environment configuration, not copied workflow variants.
+
+When reporting an exercise, include observed results and evidence rather than
+merely confirming that the instructions were read. Formatting/link checks do not
+establish behavioral compliance.

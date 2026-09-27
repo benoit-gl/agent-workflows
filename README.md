@@ -1,34 +1,33 @@
 # agent-workflows
 
-Reusable workflow instructions for AI coding agents.
+Reusable workflow instructions for AI coding agents. Target repositories own
+their product requirements, architecture, contribution rules, and acceptance
+criteria.
 
-This repository keeps agent process guidance separate from product repositories. Target repositories remain responsible for their own contribution rules, architecture, coding standards, and acceptance criteria.
+## PR review
 
-## PR review workflow
+[WORKFLOW.md](.agents/pr-reviews/WORKFLOW.md) is the authority for iterative PR
+review. It covers read-only review, local fixes, and updates to an existing PR.
+It requires evidence-based findings, semantic propagation checks, fresh broad
+reviews, and verification of the exact content delivered.
 
-The initial workflow provides an iterative review-until-converged protocol:
+- [Invocation examples](.agents/pr-reviews/README.md)
+- [Review state template](.agents/pr-reviews/STATE_TEMPLATE.md)
+- [Behavioral exercises](.agents/pr-reviews/EXERCISES.md)
+- [Agent entry point](AGENTS.md)
+- [Contribution rules](CONTRIBUTING.md)
 
-- `AGENTS.md` contains general delegation and PR-review guidance.
-- `.agents/pr-reviews/WORKFLOW.md` defines the review, triage, fix, verification, and convergence loop.
-- `.agents/pr-reviews/STATE_TEMPLATE.md` provides a compact control record for one review.
-- `.agents/pr-reviews/README.md` describes how to invoke and exercise the workflow.
-
-The protocol discovers ordinary human-facing target-repository governance,
-including conventional host policy locations, and requires findings to cite their
-governing invariants. It distinguishes read-only review, local fixes, and PR
-update authority; binds reviewed content to the committed and pushed head; and
-verifies required remote checks on the host's authoritative check target. It does
-not merge PRs, and target repositories do not need agent-specific instruction
-files.
-
-## Usage
-
-Run the agent from the target repository and explicitly reference this workflow when the agent does not load remote instructions automatically. For example:
+Example:
 
 > Review PR 19 using the PR review workflow from `benoit-gl/agent-workflows`.
 > Use `update-pr` delivery: apply accepted fixes, commit them, and push normally
 > to the existing PR head. Do not force-push, change PR state, or merge.
 
-The workflow may create local review state under `.agents/pr-reviews/state/` in the target working tree. Keep that state untracked. Prefer a local Git exclude such as `.git/info/exclude` when the target repository does not already ignore the path.
+Load the workflow explicitly when your runtime does not load remote instructions.
+Environment adapters can specify tool use and state locations. The workflow
+checks actual capabilities; it does not require particular model names or agent
+presets.
 
-The workflow is advisory process infrastructure. It does not replace CI, branch protection, required human review, or repository-specific rules.
+A completed review may report unresolved findings. Solution convergence and
+verified remote delivery are separate outcomes defined by the workflow. This
+process does not replace CI, branch protection, or human acceptance and merge.
