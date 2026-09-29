@@ -28,6 +28,11 @@ fresh reviewer contexts, and the selected delivery route. Repository read access
 connector write access, and Git push authentication are separate capabilities.
 Use actual tool schemas; role names below do not imply installed agent presets.
 
+An explicitly selected adapter may declare stable environment limits and a
+prescribed delivery route. Treat those declarations as capability facts: do not
+probe a route known to be unavailable. Discover variable capabilities and inspect
+their actual schemas before relying on them.
+
 Record unavailable facilities and substitutions. Use an explicitly selected
 environment adaptation where provided. A same-context review is not independent;
 it cannot satisfy an acceptance rule that requires independence. If required
@@ -38,7 +43,7 @@ report the affected stage as blocked. Do not invent evidence or bypass controls.
 
 Record one delivery mode before review work begins:
 
-| Mode          | Edit | Commit        | Push                  | Merge |
+| Mode          | Edit | Commit        | Remote delivery       | Merge |
 | ------------- | ---- | ------------- | --------------------- | ----- |
 | `review-only` | no   | no            | no                    | no    |
 | `local-fix`   | yes  | explicit only | no                    | no    |
@@ -49,13 +54,13 @@ Record one delivery mode before review work begins:
 - A request to fix locally selects `local-fix`. It authorizes worktree edits, not
   commits. A local commit requires separate explicit authorization recorded in
   the state file.
-- A request to update, repair, or push fixes to an existing PR selects
-  `update-pr` only when pushing is explicit.
+- A request to update, repair, deliver, or push fixes to an existing PR selects
+  `update-pr` only when remote delivery is explicit.
 - A prohibition such as "do not merge" does not by itself authorize commits or
-  pushes.
-- Approval to push does not authorize force-push, approval, closing, enabling
-  auto-merge, changing draft/ready-for-review status, labels, milestones, base
-  branch, or other PR metadata.
+  remote delivery.
+- Approval for remote delivery does not authorize force-updating, approval,
+  closing, enabling auto-merge, changing draft/ready-for-review status, labels,
+  milestones, base branch, or other PR metadata.
 - This workflow never merges a PR. Merge remains a separate user or repository
   operation outside these delivery modes.
 - If the requested loop requires a write or remote action whose mode is unclear,
@@ -63,8 +68,8 @@ Record one delivery mode before review work begins:
 
 For `update-pr`, resolve the PR's base repository/ref, head repository/ref, and
 current head SHA from authoritative remote metadata. Confirm that the head
-repository is writable. Fetch immediately before work and before
-every push. Never review or push from a stale detached checkout merely because it
+repository is writable. Refresh remote facts immediately before work and before
+every delivery. Never review or deliver from a stale snapshot merely because it
 was once based on the PR branch.
 
 ### 1.2 Discover applicable repository governance
@@ -274,30 +279,31 @@ The coordinator must validate and deduplicate findings before any edit.
    reviewed content, such as its tree or complete diff, for comparison after any
    authorized commit.
 
-## 6. Commit, push, and remote verification
+## 6. Commit, deliver, and verify remotely
 
-Apply commit steps only when commit authority is explicit. Apply push and remote
-verification steps only to `update-pr`.
+Apply commit steps only when commit authority is explicit. Apply remote delivery
+and verification steps only to `update-pr`.
 
-For `update-pr` with no changes to deliver, skip commit/push and record the
+For `update-pr` with no changes to deliver, skip commit/delivery and record the
 unchanged reviewed head as the delivery revision. Still perform final remote verification.
-Local pre-delivery checks and required post-push CI are distinct gates; neither
+Local pre-delivery checks and required post-delivery CI are distinct gates; neither
 substitutes for the other.
 
-1. After local verification, policy audit, and fresh re-review succeed, create
-   scoped commits only when authorized.
+1. After candidate verification, policy audit, and fresh re-review succeed,
+   create one scoped commit through the selected delivery route when authorized.
 2. Compare the committed tree or complete committed diff with the recorded
    reviewed content. If staging, a commit hook, or any other step changed content
    or added paths, repeat the affected policy audit, verification, and re-review
    before delivery.
 3. For `update-pr`, re-resolve both the remote PR base and head immediately before
-   pushing. If the head moved, reconcile deliberately and repeat affected checks;
+   delivery. If the head moved, reconcile deliberately and repeat affected checks;
    do not overwrite it. If the base moved, repeat checks whose result depends on
    the base or merge result before declaring convergence.
-4. Push normally to the recorded existing PR head branch. Never force-push unless
-   the user explicitly authorizes that exact operation after seeing why it is
-   needed.
-5. Record the pushed head SHA. Confirm that remote PR metadata still points to
+4. Deliver the exact reviewed tree to the recorded existing PR head branch using
+   the selected environment adapter. Prefer one coherent commit and one
+   non-force ref advancement. Never force-update unless the user explicitly
+   authorizes that exact operation after seeing why it is needed.
+5. Record the delivered head SHA. Confirm that remote PR metadata still points to
    that SHA and that prohibited PR state did not change. Re-resolve the current
    base and head before final remote verification.
    If a write response is uncertain, inspect remote state before retrying.
@@ -318,7 +324,7 @@ Report task completion separately from solution convergence:
 | Mode          | Task completion                                                                                                                                                     |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `review-only` | Requested review scope and rounds are complete, findings are triaged, and evidence/limits are reported. Unresolved findings do not make the review task incomplete. |
-| `local-fix`   | The local candidate has converged. Commit only if separately authorized; no push or remote delivery is required by this mode.                                       |
+| `local-fix`   | The local candidate has converged. Commit only if separately authorized; no remote delivery is required by this mode.                                               |
 | `update-pr`   | The delivered or unchanged head has converged and current remote verification passes.                                                                               |
 
 A read-only review can be complete with findings. Do not call its solution
@@ -353,20 +359,21 @@ human approval, CI, branch protection, domain review, or security review.
 
 - Use these cost-conscious defaults when they are available:
 
-  | Work                                            | Default                 | Escalate when                                                                                                                                               |
-  | ----------------------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  | Inventory, extraction, and routine verification | `gpt-5.6-luna`, medium  | Results are inconclusive or require substantial reasoning.                                                                                                  |
-  | General review and ordinary fixing              | `gpt-5.6-terra`, medium | A specific finding crosses modules or semantic contracts, or remains disputed after validation.                                                             |
-  | Difficult targeted analysis                     | `gpt-5.6-sol`, high     | A serious architecture, security, correctness, data-loss, concurrency, migration, or compatibility question remains unresolved after focused investigation. |
-  | Exceptional reconciliation                      | `gpt-6-astra`, low      | Targeted analysis still leaves consequential architecture, security, or debugging ambiguity.                                                                |
+  | Work                                            | Default tier | Escalate when                                                                                                                                               |
+  | ----------------------------------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  | Inventory, extraction, and routine verification | Economy      | Results are inconclusive or require substantial reasoning.                                                                                                  |
+  | General review and ordinary fixing              | Standard     | A specific finding crosses modules or semantic contracts, or remains disputed after validation.                                                             |
+  | Difficult targeted analysis                     | Strong       | A serious architecture, security, correctness, data-loss, concurrency, migration, or compatibility question remains unresolved after focused investigation. |
+  | Exceptional reconciliation                      | Frontier     | Targeted analysis still leaves consequential architecture, security, or debugging ambiguity.                                                                |
 
 - Escalate only the affected subtask. Do not repeat settled work on the stronger
   model, and return later routine work to the default path. Risk classification
   alone does not require escalation: first identify the unresolved reasoning that
   the cheaper path could not settle.
-- Runtime and user model preferences remain configuration rather than workflow
-  prerequisites. If a named model or effort is unavailable, select the closest
-  supported option and record the substitution and reason.
+- The selected environment adapter maps these tiers to concrete model and effort
+  settings. Runtime and user model preferences remain configuration rather than
+  workflow prerequisites. If a mapped model or effort is unavailable, select the
+  closest supported option and record the substitution and reason.
 - When available, record models, effort, rounds, accepted and rejected findings,
   retries, token or paid-tool usage, latency, and rework. Never invent unavailable
   usage data.

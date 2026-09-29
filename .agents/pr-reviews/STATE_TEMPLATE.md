@@ -15,7 +15,7 @@ evidence-based. Do not copy raw agent transcripts or large test logs into it.
 - Base repository/ref/revision:
 - Comparison baseline and method:
 - Head repository/ref/revision:
-- Last pushed revision, if any:
+- Last delivered revision, if any:
 - Working-tree changes included:
 - Requested behavior:
 - Acceptance criteria:
@@ -84,10 +84,10 @@ or `not applicable`, with evidence; baseline success does not verify later edits
 
 - Reviewed state identity:
 - Commits created:
-- Delivery revision (pushed or unchanged reviewed head):
+- Delivery revision (delivered or unchanged reviewed head):
 - Committed state identity matches reviewed state:
-- Remote base/head re-resolved immediately before push:
-- Normal pushes performed:
+- Remote base/head re-resolved immediately before delivery:
+- Delivery route and ref advancement performed:
 - Current remote PR head:
 - Authoritative remote check target:
 - PR metadata/state changes:

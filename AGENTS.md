@@ -26,10 +26,3 @@ roles, governance discovery, verification, and completion rules, including its
 specific concurrency and fresh-review requirements.
 
 For changes to this repository, follow [CONTRIBUTING.md](CONTRIBUTING.md).
-
-## Background references
-
-These explain delegation choices; they do not add required tools or model names.
-
-- [OpenAI multi-agent guidance](https://developers.openai.com/api/docs/guides/responses-multi-agent)
-- [OpenAI orchestration patterns](https://developers.openai.com/api/docs/guides/agents/orchestration)
