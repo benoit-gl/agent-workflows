@@ -19,9 +19,11 @@ silently weaken acceptance criteria.
 ### 1.0 Check the execution environment
 
 Before starting, identify the workflow revision and keep it fixed for the session.
-When loading remotely, resolve a commit and read the workflow and template at that
-commit. Record any adapter and its revision or content identity. On resume, reload
-the recorded instructions; assess an intentional update before continuing.
+When loading remotely, resolve the instruction source to an immutable commit SHA;
+use the workflow repository's default-branch tip unless the invocation explicitly
+selects another revision. Read the workflow, template, and any adapter from that
+same commit. Record the commit and selected adapter. On resume, reload the
+recorded instructions; assess an intentional update before continuing.
 
 Verify facilities for complete source/diff access, writable process state, checks,
 fresh reviewer contexts, and the selected delivery route. Repository read access,

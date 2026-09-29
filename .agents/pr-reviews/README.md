@@ -40,8 +40,11 @@ Bundled adapters:
 - [ChatGPT Chat and Work](adapters/chatgpt/README.md)
 
 Keep process state untracked; prefer the checkout's local Git exclude. Load the
-workflow and template at one recorded revision. Model and runtime choices belong
-to the invocation or environment adapter, not copied workflow variants.
+workflow, template, and adapter from one commit. At the start of the run, resolve
+the selected revision to a commit SHA and record it; use the workflow repository's
+default-branch tip unless the invocation explicitly selects another revision.
+Model and runtime choices belong to the invocation or environment adapter, not
+copied workflow variants.
 
 When reporting an exercise, include observed results and evidence rather than
 merely confirming that the instructions were read. Formatting/link checks do not

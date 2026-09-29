@@ -1,9 +1,8 @@
 # ChatGPT Work Adapter
 
-Before any repository work, load and follow [BOOTSTRAP.md](BOOTSTRAP.md) at the
-same recorded `agent-workflows` commit. Select this file as the one environment
-adapter. Do not continue until the bootstrap's required instruction set is
-loaded.
+Before any repository work, load and follow [BOOTSTRAP.md](BOOTSTRAP.md) from the
+same commit SHA as this file. Select this file as the one environment adapter. Do
+not continue until the bootstrap's required instruction set is loaded.
 
 Use this adapter in ChatGPT Work when local Git, shell, and a writable workspace
 are available but authenticated `git push` is not.

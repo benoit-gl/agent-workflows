@@ -5,8 +5,9 @@ model mapping. It does not replace the canonical workflow.
 
 ## Load one fixed instruction revision
 
-Resolve the default branch of `benoit-gl/agent-workflows` to a commit. At that
-exact commit, read:
+At the start of the run, resolve the tip of the default branch of
+`benoit-gl/agent-workflows` to an immutable commit SHA. At that exact commit,
+read:
 
 - `AGENTS.md`;
 - `.agents/pr-reviews/WORKFLOW.md`;

@@ -25,9 +25,12 @@ Example:
 > to the existing PR head. Do not force-update it, change PR state, or merge.
 
 Load the workflow explicitly when your runtime does not load remote instructions.
-Environment adapters can specify tool use, state locations, delivery routes, and
-concrete model mappings. The core workflow uses portable cost tiers and does not
-require particular model names or agent presets.
+Resolve the selected workflow revision to a commit SHA, using the repository's
+default-branch tip unless the invocation explicitly selects another revision.
+Load every workflow and adapter file from that commit. Environment adapters can
+specify tool use, state locations, delivery routes, and concrete model mappings.
+The core workflow uses portable cost tiers and does not require particular model
+names or agent presets.
 
 A completed review may report unresolved findings. Solution convergence and
 verified remote delivery are separate outcomes defined by the workflow. This
