@@ -5,7 +5,9 @@ model mapping. It does not replace the canonical workflow.
 
 ## Load one fixed instruction revision
 
-At the start of the run, resolve the tip of the default branch of
+At the start of the run, use the instruction source selected by the invocation.
+If the invocation selects a branch, tag, or other ref, resolve that source to an
+immutable commit SHA. Otherwise, resolve the tip of the default branch of
 `benoit-gl/agent-workflows` to an immutable commit SHA. At that exact commit,
 read:
 
