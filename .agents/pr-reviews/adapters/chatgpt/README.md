@@ -5,17 +5,33 @@ to ChatGPT environments. They define environment capabilities, delivery routes,
 and concrete model mappings without changing review authority, acceptance
 criteria, or convergence rules.
 
-For each run:
+Start each run from exactly one environment entry point. The selected entry point
+requires the shared bootstrap before repository work begins; the bootstrap loads
+the canonical workflow, state template, and model mapping at one recorded
+revision.
 
-1. load [BOOTSTRAP.md](BOOTSTRAP.md) and [MODELS.md](MODELS.md); and
-2. select exactly one environment adapter: [CHAT.md](CHAT.md) or
-   [WORK.md](WORK.md).
+- [Chat entry point](CHAT.md)
+- [Work entry point](WORK.md)
+- [Shared bootstrap](BOOTSTRAP.md)
+- [Model mapping](MODELS.md)
 
-Example invocation:
+## Chat invocation
 
-> Review PR `<number>` in `<owner/repository>` using the PR review workflow from
-> `benoit-gl/agent-workflows`, the ChatGPT bootstrap and model mapping, and the
-> ChatGPT Work adapter. Use `update-pr` delivery. Do not merge.
+> Review PR `<number>` in `<owner/repository>`. Before doing any repository work,
+> load and follow `.agents/pr-reviews/adapters/chatgpt/BOOTSTRAP.md` from one
+> resolved commit of `benoit-gl/agent-workflows`, selecting
+> `.agents/pr-reviews/adapters/chatgpt/CHAT.md` as the environment adapter. Use
+> `update-pr` delivery. Do not force-update, approve, close, enable auto-merge,
+> change PR state, or merge.
+
+## Work invocation
+
+> Review PR `<number>` in `<owner/repository>`. Before doing any repository work,
+> load and follow `.agents/pr-reviews/adapters/chatgpt/BOOTSTRAP.md` from one
+> resolved commit of `benoit-gl/agent-workflows`, selecting
+> `.agents/pr-reviews/adapters/chatgpt/WORK.md` as the environment adapter. Use
+> `update-pr` delivery. Do not force-update, approve, close, enable auto-merge,
+> change PR state, or merge.
 
 The core workflow remains authoritative for modes, governance, findings,
 verification, and completion. These files describe only how ChatGPT satisfies

@@ -18,10 +18,10 @@ explicitly if needed. Findings can remain unresolved when the review is complete
 Update an existing PR:
 
 > Run the iterative PR review workflow from `benoit-gl/agent-workflows` on PR
-> `<number>` in `<owner/repository>`. Use the applicable ChatGPT environment
-> adapter and `update-pr` delivery: apply accepted fixes and deliver the reviewed
-> tree to its existing head branch. Do not force-update, approve, close, enable
-> auto-merge, change PR state, or merge.
+> `<number>` in `<owner/repository>`. Use `update-pr` delivery and the environment
+> adapter selected for your runtime. Apply accepted fixes and deliver the exact
+> reviewed tree to the existing head branch. Do not force-update, approve, close,
+> enable auto-merge, change PR state, or merge.
 
 Local fixes:
 
