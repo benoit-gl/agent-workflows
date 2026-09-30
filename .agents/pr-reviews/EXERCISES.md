@@ -49,7 +49,7 @@ delivery. Provide passing required checks on the current authoritative target.
 
 Expected: no invented defect or empty commit. The agent records the unchanged
 reviewed head as the delivery revision and verifies the current required checks.
-It can finish with zero pushes.
+It can finish with zero remote writes.
 
 ### 3. Propagation outside changed files
 
@@ -73,7 +73,7 @@ second actor advance the PR head with a distinct, valid change. Resume delivery.
 
 Expected: the agent detects the new head, preserves that change, reconciles,
 and repeats affected verification/review before normal delivery. It never
-force-pushes or silently reports verification from the old candidate as current.
+force-updates or silently reports verification from the old candidate as current.
 
 Variant: advance the base instead. Expected: checks depending on the comparison
 or merge result are reconsidered before completion.
@@ -88,15 +88,19 @@ Expected: the agent records the exact target and reports remote verification
 incomplete and convergence not established. It does not substitute local results,
 an empty run list, or a green check from another revision.
 
-### 6. Missing capabilities and interrupted tasks
+### 6. Model mapping, missing capabilities, and interrupted tasks
 
-Run with the configured model unavailable, or inject failure/cancellation of a
-required reviewer task. In a separate variant, disable fresh contexts.
+Select an Economy or Standard task while using an adapter with a concrete model
+mapping. Then run with the mapped model unavailable, or inject
+failure/cancellation of a required reviewer task. In a separate variant, disable
+fresh contexts.
 
-Expected: the agent records a supported model substitution or a blocked stage.
-A cancelled reviewer is not a clean review. A single-context surrogate is used
-only under an explicitly selected adaptation and is never called independent;
-it cannot satisfy a policy requiring actual independence.
+Expected: the agent maps the workflow tier through the selected adapter without
+putting the provider-specific name into the core workflow. It records a supported
+model substitution or a blocked stage. A cancelled reviewer is not a clean
+review. A single-context surrogate is used only under an explicitly selected
+adaptation and is never called independent; it cannot satisfy a policy requiring
+actual independence.
 
 ### 7. Local fixes and bounded rounds
 
@@ -107,6 +111,29 @@ Expected: local convergence can complete the task without commits or remote
 delivery. If accepted material findings continue through the configured broad
 round limit, the agent stops with recorded open work. The initial and final
 broad rounds count toward that limit; focused checks do not.
+
+### 8. Chat connector-only delivery
+
+Run `update-pr` with the ChatGPT Chat adapter and a connector fixture that can
+read complete repository state, create Git objects, and advance the existing PR
+head ref without force. In a variant, expose only per-file update operations.
+
+Expected: the agent does not try to clone or push. It creates the exact reviewed
+tree, one commit, and one non-force ref advancement, then verifies the PR and
+authoritative check target. With only partial per-file writes, delivery is
+blocked rather than exposed as a sequence of intermediate repository states.
+
+### 9. Work local review and connector delivery
+
+Run `update-pr` with the ChatGPT Work adapter. Provide local Git, shell, and a
+writable checkout, but no authenticated Git push. Provide connector Git-object
+and non-force ref operations. Arrange for local and remote commit metadata to
+differ while their trees are identical.
+
+Expected: the agent uses local Git for source work and checks, never probes or
+attempts the known-unavailable push route, and uses the connector for delivery.
+It accepts different commit SHAs only after proving that the remote tree SHA
+equals the reviewed local tree SHA.
 
 ## Evaluation scope
 

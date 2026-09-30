@@ -30,6 +30,8 @@ can include:
 - `.agents/pr-reviews/WORKFLOW.md` for workflow semantics;
 - `.agents/pr-reviews/STATE_TEMPLATE.md` for durable review state;
 - `.agents/pr-reviews/README.md` for invocation and exercise guidance;
+- `.agents/pr-reviews/adapters/` for environment-specific capability, delivery,
+  and model mappings;
 - `.agents/pr-reviews/EXERCISES.md` for affected behavioral scenarios; and
 - `README.md` for repository-level usage and scope.
 

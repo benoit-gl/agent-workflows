@@ -18,9 +18,10 @@ explicitly if needed. Findings can remain unresolved when the review is complete
 Update an existing PR:
 
 > Run the iterative PR review workflow from `benoit-gl/agent-workflows` on PR
-> `<number>` in `<owner/repository>`. Use `update-pr` delivery: apply accepted
-> fixes, commit them, and push normally to its existing head branch.
-> Do not force-push, approve, close, enable auto-merge, change PR state, or merge.
+> `<number>` in `<owner/repository>`. Use `update-pr` delivery and the environment
+> adapter selected for your runtime. Apply accepted fixes and deliver the exact
+> reviewed tree to the existing head branch. Do not force-update, approve, close,
+> enable auto-merge, change PR state, or merge.
 
 Local fixes:
 
@@ -34,9 +35,16 @@ Use a checkout of the target repository when available. An environment adapter
 may specify another source-access route and state location. It must identify
 unsupported steps and any loss of review isolation.
 
+Bundled adapters:
+
+- [ChatGPT Chat and Work](adapters/chatgpt/README.md)
+
 Keep process state untracked; prefer the checkout's local Git exclude. Load the
-workflow and template at one recorded revision. Model and runtime choices belong
-to the invocation or environment configuration, not copied workflow variants.
+workflow, template, and adapter from one commit. At the start of the run, resolve
+the selected revision to a commit SHA and record it; use the workflow repository's
+default-branch tip unless the invocation explicitly selects another revision.
+Model and runtime choices belong to the invocation or environment adapter, not
+copied workflow variants.
 
 When reporting an exercise, include observed results and evidence rather than
 merely confirming that the instructions were read. Formatting/link checks do not
