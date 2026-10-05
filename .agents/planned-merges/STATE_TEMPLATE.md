@@ -19,22 +19,22 @@ logs into it.
 
 ## Repository decisions and governance
 
-| ID | Status | Decision or invariant | Governing source | Rationale or user direction |
-| -- | ------ | --------------------- | ---------------- | --------------------------- |
-| D-001 | accepted | | | |
+| ID    | Status   | Decision or invariant | Governing source | Rationale or user direction |
+| ----- | -------- | --------------------- | ---------------- | --------------------------- |
+| D-001 | accepted |                       |                  |                             |
 
 Statuses: `pending`, `accepted`, `superseded`.
 
 ## Readiness gate
 
-| Criterion | Status | Evidence |
-| --------- | ------ | -------- |
-| Prerequisites landed | | |
-| Observable behavior and exclusions clear | | |
-| Material design choices settled | | |
-| Verification/evidence identified | | |
-| Plan consistent with current repository | | |
-| Scope is one coherent merge unit | | |
+| Criterion                                | Status | Evidence |
+| ---------------------------------------- | ------ | -------- |
+| Prerequisites landed                     |        |          |
+| Observable behavior and exclusions clear |        |          |
+| Material design choices settled          |        |          |
+| Verification/evidence identified         |        |          |
+| Plan consistent with current repository  |        |          |
+| Scope is one coherent merge unit         |        |          |
 
 - Readiness result: `ready`, `not ready`, or `blocked`
 - Required plan repairs:
