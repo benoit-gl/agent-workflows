@@ -176,8 +176,10 @@ class.
 
 Additional mandatory promotions:
 
-- If implementation requires a material scaffolding-plan revision, promote by at
-  least one class, with a minimum of Q2.
+- A material governing-plan revision promotes Q0 or Q1 to at least Q2 and Q2 to
+  at least Q3. It does not by itself promote Q3 to Q4. Reserve Q4 for a
+  consequential Q3 issue that remains unresolved or materially disputed after
+  Strong-tier analysis.
 - If required deterministic verification cannot be performed or authoritatively
   observed in Chat but can be performed in Work, promote the merge point to at
   least Q2. Complete all Chat-capable review and fixing before handoff, but do not

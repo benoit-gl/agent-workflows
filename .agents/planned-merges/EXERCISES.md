@@ -164,3 +164,18 @@ Expected behavior:
 - load the planned-merge workflow, PR-review workflow, state templates, and both
   matching adapters from that same commit; and
 - keep that instruction revision fixed for the session.
+
+## 13. Material plan revision on an existing Q3 unit
+
+A merge point is already Q3 because it crosses a security boundary. Implementation
+requires a material revision to the governing plan, but Strong-tier analysis has
+not found an unresolved or materially disputed Q3 issue.
+
+Expected behavior:
+
+- keep the qualification class at Q3 solely because of the plan revision;
+- still require the Q2 Work qualification and the Q3 Strong targeted review;
+- promote to Q4 only if a consequential Q3 issue remains unresolved or materially
+  disputed after Strong-tier analysis; and
+- do not spend Frontier capacity solely because the governing plan changed.
+
