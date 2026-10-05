@@ -44,10 +44,11 @@ It treats Chat and Work as interchangeable execution environments, keeps the PR
 review workflow as the inner convergence engine, and uses objective qualification
 classes to require stronger independent review when the change warrants it.
 
-The default cost policy keeps work in Chat through provisional convergence and
-uses at most one Chat-to-Work handoff for merge points that require Work
-qualification. Once that handoff occurs, Work fixes routine findings and
-continues qualification without bouncing work back to Chat. Human intervention
+The default cost policy keeps work in Chat through provisional convergence when
+Chat can satisfy every convergence prerequisite. If required verification exists
+only in Work, it hands off once after all other Chat-capable convergence work is
+complete. Once that handoff occurs, Work fixes routine findings and continues
+qualification without bouncing work back to Chat. Human intervention
 is reserved for material decisions, scope replanning, and merge gates.
 
 - [Invocation examples](.agents/planned-merges/README.md)

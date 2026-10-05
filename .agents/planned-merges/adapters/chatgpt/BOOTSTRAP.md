@@ -6,7 +6,8 @@ It does not replace either canonical workflow.
 ## Load one fixed instruction revision
 
 Resolve the selected `benoit-gl/agent-workflows` revision to an immutable commit
-SHA. At that exact commit, read:
+SHA. If the invocation does not select a branch, tag, or other ref, resolve the
+tip of the repository's default branch. At that exact commit, read:
 
 - `AGENTS.md`;
 - `.agents/planned-merges/WORKFLOW.md`;

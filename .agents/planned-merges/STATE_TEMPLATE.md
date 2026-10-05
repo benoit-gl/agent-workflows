@@ -57,6 +57,7 @@ Statuses: `pending`, `accepted`, `superseded`.
 - Changed scope:
 - Required tests/evidence:
 - Provisional convergence: `not established` or `converged`
+- Provisional convergence blocker, if any:
 - Current PR-review state/evidence:
 
 ## Scope drift

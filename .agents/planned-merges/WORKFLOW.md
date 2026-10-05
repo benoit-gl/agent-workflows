@@ -18,8 +18,10 @@ workflow.
 ## 1. Establish authority and durable state
 
 Resolve the selected `agent-workflows` revision to an immutable commit and keep it
-fixed for the session. Load this workflow, its state template, the PR review
-workflow, and the selected environment adapter from that same revision.
+fixed for the session. If the invocation does not select a revision, resolve the
+repository's default-branch tip and use that commit. Load this workflow, its state
+template, the PR review workflow, and the selected environment adapter from that
+same revision.
 
 Record:
 
@@ -96,7 +98,10 @@ When implementation is authorized and the readiness gate passes:
 4. Add or update tests and durable evidence required by the plan and repository.
 5. Open a draft PR when the change becomes useful to share.
 6. Run the PR review workflow in `update-pr` mode until the implementation PR
-   reaches **provisional convergence**.
+   reaches **provisional convergence**. In Chat, if a required convergence check
+   can be performed or authoritatively observed only in Work, do not weaken
+   convergence; complete the remaining Chat-capable work and use the handoff rule
+   in section 7.
 
 Provisional convergence means the current PR satisfies the PR review workflow's
 solution-convergence requirements. It does not by itself mean that this outer
@@ -146,8 +151,9 @@ Additional mandatory promotions:
 - If implementation requires a material scaffolding-plan revision, promote by at
   least one class, with a minimum of Q2.
 - If required deterministic verification cannot be performed or authoritatively
-  observed in Chat but can be performed in Work, Work qualification is mandatory
-  even when the semantic class would otherwise be lower.
+  observed in Chat but can be performed in Work, promote the merge point to at
+  least Q2. Complete all Chat-capable review and fixing before handoff, but do not
+  weaken PR-review convergence by treating the unavailable verification as passed.
 - If a newly accepted finding introduces a Q2, Q3, or Q4 trigger, immediately
   raise the class before further qualification.
 
@@ -166,11 +172,15 @@ perform readiness work, plan repair, implementation, fixing, or verification.
 
 When both are available, the default orchestration is:
 
-1. Stay in Chat through readiness, implementation, and provisional convergence.
-2. If the qualification class requires Work, create one complete handoff
-   checkpoint.
-3. Switch to Work once.
-4. Keep the work in Work through final qualification.
+1. Stay in Chat through readiness, implementation, and provisional convergence
+   when Chat can satisfy every convergence prerequisite.
+2. If a required convergence check can be performed or authoritatively observed
+   only in Work, complete all other Chat-capable review and fixing, then prepare
+   the handoff with that check recorded as the only remaining convergence blocker.
+3. If the qualification class or unavailable verification capability requires
+   Work, create one complete handoff checkpoint.
+4. Switch to Work once.
+5. Keep the work in Work through final qualification.
 
 The normal target is **at most one Chat-to-Work transition per merge point**.
 Record every environment transition and its reason.
@@ -180,10 +190,12 @@ A Work handoff is ready only when:
 - the planned scope is stable;
 - no material user decision is pending;
 - the implementation PR exists and its current head is identified;
-- provisional convergence is established;
-- required deterministic checks available before handoff pass; and
-- the state record contains the qualification class, reasons, remaining mandatory
-  reviews, and exact resume action.
+- provisional convergence is established, or it is blocked only by required
+  verification that can be performed or authoritatively observed in Work;
+- all deterministic checks that Chat can perform or authoritatively observe have
+  passed, and every Work-only verification blocker is identified; and
+- the state record contains the qualification class, reasons, convergence status
+  or blocker, remaining mandatory reviews, and exact resume action.
 
 Do not use Work merely because the change is important or because Work is
 available. Use it when an objective qualification requirement or unavailable
@@ -197,14 +209,17 @@ qualification campaign. Do not send routine findings back to Chat to save comput
 Within Work:
 
 1. Re-resolve the repository, plan, PR head, and qualification class.
-2. Run the required fresh whole-PR review at Standard tier.
-3. Run any mandatory Q3 or Q4 targeted review even if the Standard review is
+2. If provisional convergence was blocked only by Work-only verification, run
+   that verification and resume the PR review workflow until provisional
+   convergence is established.
+3. Run the required fresh whole-PR qualification at Standard tier.
+4. Run any mandatory Q3 or Q4 targeted review even if the Standard review is
    clean.
-4. Triage findings under the PR review workflow.
-5. Fix accepted findings that do not require a material user decision.
-6. Re-run focused verification, integration checks, policy audit, and fresh
+5. Triage findings under the PR review workflow.
+6. Fix accepted findings that do not require a material user decision.
+7. Re-run focused verification, integration checks, policy audit, and fresh
    review as required.
-7. Update the existing implementation PR and continue until qualified.
+8. Update the existing implementation PR and continue until qualified.
 
 Routine fixing, tests, comments, documentation propagation, and another review
 round are not reasons to stop or return to Chat.
@@ -240,9 +255,11 @@ convergence. For Q2 and above, the mandatory Work campaign supplies the
 independent stability confirmation; do not add a redundant clean Chat pass solely
 for bookkeeping.
 
-If the required Work environment or higher-tier reviewer is unavailable, report
-the PR as provisionally converged but **not qualified**. Do not silently weaken
-the class.
+If Work is required only for qualification after provisional convergence and the
+required Work environment or higher-tier reviewer is unavailable, report the PR
+as provisionally converged but **not qualified**. If Work-only verification still
+blocks provisional convergence, report both convergence and qualification as not
+established. Do not silently weaken the class.
 
 ## 10. Completion and reporting
 

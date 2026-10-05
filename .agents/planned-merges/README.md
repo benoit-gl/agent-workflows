@@ -5,10 +5,16 @@ Read [WORKFLOW.md](WORKFLOW.md) for the lifecycle rules and
 workflow uses the existing [PR review workflow](../pr-reviews/WORKFLOW.md) for
 each PR convergence loop.
 
+At the start of a run, resolve the selected `agent-workflows` revision to an
+immutable commit. If the invocation does not select a revision, use the tip of the
+repository's default branch. Load the planned-merge and PR-review workflow files
+and adapters from that same commit.
+
 Chat and Work are interchangeable execution environments. They are not synonyms
 for planning and implementation. The normal cost-conscious path stays in Chat
-through provisional convergence and switches to Work once only when the
-qualification class requires it.
+through provisional convergence when Chat can satisfy every convergence
+prerequisite. If required verification exists only in Work, hand off once after
+all other Chat-capable convergence work is complete.
 
 ## Typical Chat invocation
 
@@ -17,10 +23,12 @@ qualification class requires it.
 > Assess readiness against the current repository. If the plan needs an
 > unambiguous repair and planning edits are authorized, create a documentation
 > draft PR and run `update-pr` to convergence. Otherwise implement the ready
-> merge point, create a draft implementation PR, and run `update-pr` to
-> provisional convergence. Stop for material user decisions or a human planning
-> merge. If Work qualification is required, stop only when the Work handoff is
-> complete and ready.
+> merge point, create a draft implementation PR, and run `update-pr` toward
+> provisional convergence. If a required verification capability exists only in
+> Work, complete all other Chat-capable convergence work and record that blocker
+> in the handoff instead of treating it as passed. Stop for material user
+> decisions or a human planning merge. If Work qualification is required, stop
+> only when the Work handoff is complete and ready.
 
 ## Typical Work handoff invocation
 

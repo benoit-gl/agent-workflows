@@ -14,5 +14,8 @@ required. When it is required, complete the handoff checkpoint with the exact
 plan and PR identity, class triggers, completed verification, remaining mandatory
 reviews, and resume action.
 
-A merge point that requires Work remains provisionally converged, not qualified,
-until that campaign is complete.
+If Chat has established provisional convergence, a merge point that requires
+Work remains provisionally converged, not qualified, until that campaign is
+complete. If a Work-only verification blocker prevents provisional convergence,
+complete all other Chat-capable review and fixing, then hand off with convergence
+explicitly blocked on that check. Do not mark the PR converged in Chat.

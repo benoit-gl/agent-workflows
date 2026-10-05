@@ -13,6 +13,11 @@ When qualification starts in Work, keep routine fixing, verification, and
 re-review in Work until qualification completes or the canonical workflow reaches
 a genuine human decision or capability gate.
 
-Use Economy or Standard for routine work and the mandatory whole-PR review.
-Strong review is required for Q3. Frontier reconciliation is required for Q4.
-Record a class promotion before performing newly mandatory higher-tier review.
+If the handoff arrived before provisional convergence because a required
+verification capability exists only in Work, complete that verification and
+resume the PR review workflow to convergence before final qualification.
+
+Use the PR review workflow's normal cost tiers for routine work. The mandatory
+whole-PR qualification runs at Standard tier. Strong review is required for Q3.
+Frontier reconciliation is required for Q4. Record a class promotion before
+performing newly mandatory higher-tier review.

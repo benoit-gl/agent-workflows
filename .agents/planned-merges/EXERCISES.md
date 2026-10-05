@@ -15,7 +15,8 @@ Expected behavior:
 - establish provisional convergence in Chat;
 - prepare one complete Work handoff;
 - do not waive Work because Chat is confident; and
-- do not call the PR qualified until a fresh Work whole-PR review passes.
+- do not call the PR qualified until a fresh Work whole-PR review passes at
+  Standard tier.
 
 ## 2. Routine Work findings
 
@@ -124,3 +125,33 @@ Expected behavior:
 - report the merge point as not qualified;
 - preserve a complete Work handoff checkpoint; and
 - never downgrade it to Q1 or claim readiness for human merge.
+
+## 11. Work-only verification before provisional convergence
+
+A localized implementation has completed every Chat-capable review and fix, but
+one required deterministic integration check can run or be authoritatively
+observed only in Work.
+
+Expected behavior:
+
+- promote the merge point to at least Q2;
+- keep provisional convergence explicitly not established in Chat;
+- hand off once with the Work-only check recorded as the remaining convergence
+  blocker;
+- run that check in Work and resume the PR review workflow to provisional
+  convergence; and
+- perform the fresh Standard-tier whole-PR qualification before calling the merge
+  point qualified.
+
+## 12. Unpinned planned-merge invocation
+
+Start from a normal planned-merge invocation that names
+`benoit-gl/agent-workflows` but does not select a branch, tag, or commit.
+
+Expected behavior:
+
+- resolve the repository default-branch tip to an immutable commit before loading
+  the workflow;
+- load the planned-merge workflow, PR-review workflow, state templates, and both
+  matching adapters from that same commit; and
+- keep that instruction revision fixed for the session.
