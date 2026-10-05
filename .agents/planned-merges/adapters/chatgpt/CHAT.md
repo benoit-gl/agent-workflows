@@ -17,9 +17,11 @@ action.
 
 If Chat has established provisional convergence, a merge point that requires
 Work remains provisionally converged, not qualified, until that campaign is
-complete. If a Work-only verification blocker prevents provisional convergence,
-complete all other Chat-capable review and fixing, then hand off with convergence
-explicitly blocked on that check. Do not mark the PR converged in Chat.
+complete. If a Work-only convergence capability prevents provisional
+convergence, complete all other Chat-capable review and fixing, then hand off
+with convergence explicitly blocked on that capability. This includes a required
+fresh reviewer context when Chat cannot provide one. Do not mark the PR converged
+in Chat.
 
 When the checkpoint is complete and the only next step is the manual switch to
 Work, record an environment handoff rather than a human gate or capability

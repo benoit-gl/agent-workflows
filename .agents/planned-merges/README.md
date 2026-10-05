@@ -31,6 +31,8 @@ The workflow tries to balance these goals:
 - prevent an agent's confidence in its own work from deciding whether stronger
   review is required;
 - keep routine work in the least expensive capable environment;
+- avoid duplicate Work review when one current result satisfies multiple review
+  gates;
 - minimize manual Chat-to-Work transitions that can block progress;
 - keep Work responsible for routine follow-up once a required handoff occurs;
 - stop for human judgment only when a material decision or explicit authority is
@@ -80,8 +82,15 @@ requirements, prepares one complete handoff when Work becomes objectively
 required, and then keeps routine fixes and re-review in Work. The goal is at most
 one Chat-to-Work transition per merge point.
 
-This can consume more Work capacity after handoff than repeatedly moving routine
-work back to Chat, but it reduces human-blocking stalls and coordination cost.
+In the current ChatGPT operating model, Chat is effectively free with respect to
+the scarce Work usage quota, while Work consumes that quota. This makes it
+important to finish Chat-capable work before handoff and to avoid duplicate Work
+review when one fresh result satisfies multiple gates. This cost relationship is
+an environment assumption and should be recalibrated if product limits change.
+
+Keeping routine follow-up in Work after handoff can still consume more Work
+capacity than bouncing work back to Chat, but it reduces human-blocking stalls and
+coordination cost.
 
 ### Human gates versus operational stops
 
@@ -99,6 +108,12 @@ A PR can converge under the PR review workflow and still require stronger
 qualification because of its semantic risk. Keeping those states separate avoids
 two opposite errors: treating a clean ordinary review as sufficient for every
 change, or forcing high-tier review into every ordinary PR review.
+
+Separate states do not imply duplicate executions. If a fresh Standard-tier
+whole-PR Work review on the unchanged complete PR is both the review that closes
+PR-review convergence and the Q2+ whole-PR qualification, the workflow records
+that one review as evidence for both gates. This preserves the semantic
+distinction while conserving scarce Work quota.
 
 ### Repair the plan before coding through ambiguity
 
@@ -157,9 +172,10 @@ and adapters from that same commit.
 > unambiguous repair and planning edits are authorized, create a documentation
 > draft PR and run `update-pr` to convergence. Otherwise implement the ready
 > merge point, create a draft implementation PR, and run `update-pr` toward
-> provisional convergence. If a required verification capability exists only in
-> Work, complete all other Chat-capable convergence work and record that blocker
-> in the handoff instead of treating it as passed. Stop for a human gate or
+> provisional convergence. If a required convergence capability exists only in
+> Work, including a required fresh reviewer context, complete all other
+> Chat-capable convergence work and record that blocker in the handoff instead of
+> treating it as passed. Stop for a human gate or
 > capability blocker. If Work qualification is required, stop only when the Work
 > handoff is complete and ready.
 

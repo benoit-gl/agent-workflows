@@ -45,10 +45,13 @@ review workflow as the inner convergence engine, and uses objective qualificatio
 classes to require stronger independent review when the change warrants it.
 
 The default cost policy keeps work in Chat through provisional convergence when
-Chat can satisfy every convergence prerequisite. If required verification exists
-only in Work, it hands off once after all other Chat-capable convergence work is
-complete. Once that handoff occurs, Work fixes routine findings and continues
-qualification without bouncing work back to Chat.
+Chat can satisfy every convergence prerequisite. If a required convergence
+capability exists only in Work, including a fresh reviewer context, it hands off
+once after all other Chat-capable convergence work is complete. Once that handoff
+occurs, Work fixes routine findings and continues qualification without bouncing
+work back to Chat. When one fresh Standard-tier Work whole-PR review on unchanged
+content satisfies both the convergence and Q2+ qualification contracts, the same
+review is recorded for both instead of being repeated.
 
 Q2 and above require Work and a fresh Standard-tier whole-PR qualification. Q3
 adds Strong targeted review, and Q4 adds Frontier targeted reconciliation.

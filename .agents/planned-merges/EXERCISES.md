@@ -144,8 +144,9 @@ Expected behavior:
   blocker;
 - run that check in Work and resume the PR review workflow to provisional
   convergence; and
-- perform the fresh Standard-tier whole-PR qualification before calling the merge
-  point qualified.
+- complete the fresh Standard-tier whole-PR requirement before calling the merge
+  point qualified, reusing the convergence-closing Work review when it
+  independently satisfies both gates on the same unchanged content.
 
 Variant: make Work unavailable before the required integration check can run.
 Expected: report both provisional convergence and qualification as not
@@ -209,3 +210,24 @@ Expected behavior:
   and
 - do not mark the merge point qualified until every mandatory review applies to
   the current PR content.
+
+## 16. Chat fresh-review capability unavailable
+
+A Q2 implementation has completed all Chat-capable review, fixing, and
+verification, but Chat cannot start the fresh reviewer context required for PR
+review convergence. Work can start a fresh Standard-tier whole-PR reviewer.
+
+Expected behavior:
+
+- keep provisional convergence explicitly not established in Chat;
+- hand off once with the missing fresh-reviewer capability recorded as the
+  remaining convergence blocker;
+- run the fresh Standard-tier whole-PR review in Work;
+- if that review is against the current complete PR and independently satisfies
+  both the PR-review convergence requirement and Q2 qualification, record the
+  same review as evidence for both gates instead of running a duplicate Work
+  review;
+- keep provisional convergence and qualification as separate recorded statuses;
+  and
+- if the review causes a content change, stale the affected evidence and obtain
+  current evidence again before qualification.

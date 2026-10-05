@@ -26,9 +26,12 @@ Those repetitions add local context; they do not weaken or redefine the rules.
   qualification.
 - Q3 adds a Strong-tier targeted review of the qualifying risk. Q4 adds
   Frontier-tier targeted reconciliation.
-- Work-only required verification promotes the merge point to at least Q2. If it
-  blocks PR-review convergence, hand off with convergence explicitly not
-  established; never treat unavailable verification as passed.
+- If a required PR-review convergence capability is unavailable in Chat but
+  available in Work, complete all other Chat-capable convergence work and hand
+  off with convergence explicitly not established. Missing deterministic
+  verification promotes the merge point to at least Q2; a missing fresh-reviewer
+  capability alone does not change the qualification class. Never treat
+  unavailable evidence as passed.
 - After a Chat-to-Work handoff, stay in Work for routine fixing, verification,
   and re-review until qualification completes or a stop condition occurs.
 - Human gates require human judgment or authority and are limited to materially
@@ -127,10 +130,11 @@ When implementation is authorized and the readiness gate passes:
 4. Add or update tests and durable evidence required by the plan and repository.
 5. Open a draft PR when the change becomes useful to share.
 6. Run the PR review workflow in `update-pr` mode until the implementation PR
-   reaches **provisional convergence**. In Chat, if a required convergence check
-   can be performed or authoritatively observed only in Work, do not weaken
-   convergence; complete the remaining Chat-capable work and use the handoff rule
-   in section 7.
+   reaches **provisional convergence**. In Chat, if a required convergence
+   capability is available only in Work, do not weaken convergence; complete the
+   remaining Chat-capable work and use the handoff rule in section 7. This
+   includes a required fresh reviewer context as well as deterministic
+   verification.
 
 Provisional convergence means the current PR satisfies the PR review workflow's
 solution-convergence requirements. It does not by itself mean that this outer
@@ -209,10 +213,11 @@ When both are available, the default orchestration is:
 
 1. Stay in Chat through readiness, implementation, and provisional convergence
    when Chat can satisfy every convergence prerequisite.
-2. If a required convergence check can be performed or authoritatively observed
-   only in Work, complete all other Chat-capable review and fixing, then prepare
-   the handoff with that check recorded as the only remaining convergence blocker.
-3. If the qualification class or unavailable verification capability requires
+2. If a required convergence capability is available only in Work, complete all
+   other Chat-capable review and fixing, then prepare the handoff with that
+   capability recorded as the remaining convergence blocker. Examples include a
+   required deterministic check or a required fresh reviewer context.
+3. If the qualification class or unavailable convergence capability requires
    Work, create one complete handoff checkpoint.
 4. Switch to Work once.
 5. Keep the work in Work through final qualification.
@@ -225,42 +230,50 @@ A Work handoff is ready only when:
 - the planned scope is stable;
 - no material user decision is pending;
 - the implementation PR exists and its current head is identified;
-- provisional convergence is established, or it is blocked only by required
-  verification that can be performed or authoritatively observed in Work;
-- all deterministic checks that Chat can perform or authoritatively observe have
-  passed, and every Work-only verification blocker is identified; and
+- provisional convergence is established, or it is blocked only by a required
+  convergence capability that is available in Work;
+- all review and verification work that Chat can perform or authoritatively
+  observe is complete, and every Work-only convergence blocker is identified; and
 - the state record contains the qualification class, reasons, convergence status
   or blocker, remaining mandatory reviews, and exact resume action.
 
 Do not use Work merely because the change is important or because Work is
 available. Use it when an objective qualification requirement or unavailable
-verification capability requires it.
+convergence capability requires it.
 
 ## 8. Run one autonomous Work verification and qualification campaign
 
-Once a merge point enters Work because required verification or qualification
-requires it, Work owns the rest of the autonomous campaign. Do not send routine
-findings back to Chat to save compute.
+Once a merge point enters Work because a required convergence capability or
+qualification requires it, Work owns the rest of the autonomous campaign. Do not
+send routine findings back to Chat to save compute.
 
 Within Work:
 
 1. Re-resolve the repository, plan, PR head, and qualification class.
-2. If provisional convergence was blocked only by Work-only verification, run
-   that verification and resume the PR review workflow until provisional
-   convergence is established.
-3. Run the required fresh whole-PR qualification at Standard tier in a fresh
-   reviewer context.
-4. Run any mandatory Q3 or Q4 targeted review even if the Standard review is
+2. If provisional convergence is blocked only by a Work-only convergence
+   capability, complete that capability and resume the PR review workflow until
+   provisional convergence is established.
+3. When the fresh whole-PR review that establishes provisional convergence is a
+   Standard-tier Work review in a fresh reviewer context against the current
+   complete PR, and Q2+ qualification requires the same review scope and
+   freshness, record that one review as satisfying both gates. Keep provisional
+   convergence and qualification as separate statuses; do not run a duplicate
+   review solely to relabel identical evidence.
+4. If Q2+ qualification is not already satisfied by step 3, run the required
+   fresh whole-PR qualification at Standard tier in a fresh reviewer context.
+5. Run any mandatory Q3 or Q4 targeted review even if the Standard review is
    clean.
-5. Triage findings under the PR review workflow.
-6. Fix accepted findings that do not require a material user decision.
-7. Re-run focused verification, integration checks, policy audit, and fresh
+6. Triage findings under the PR review workflow.
+7. Fix accepted findings that do not require a material user decision.
+8. Re-run focused verification, integration checks, policy audit, and fresh
    review as required.
-8. After any fix or other PR-content change, record the new content identity and
+9. After any fix or other PR-content change, record the new content identity and
    re-evaluate qualification evidence. Mark evidence stale when its reviewed
-   content or scoped risk surface changed. Always rerun the Standard whole-PR
-   qualification on the new complete content before marking Q2+ qualified.
-9. Update the existing implementation PR and continue until qualified.
+   content or scoped risk surface changed. Before marking Q2+ qualified, always
+   obtain a current Standard whole-PR qualification on the new complete content;
+   a convergence review can supply it only when it independently satisfies both
+   contracts.
+10. Update the existing implementation PR and continue until qualified.
 
 Routine fixing, tests, comments, documentation propagation, and another review
 round are not reasons to stop or return to Chat.
@@ -300,11 +313,15 @@ convergence. For Q2 and above, the mandatory Work campaign supplies the
 independent stability confirmation; do not add a redundant clean Chat pass solely
 for bookkeeping.
 
+Convergence and qualification remain separate states, but they do not require
+duplicate execution when one current review independently satisfies both
+contracts. Record the shared evidence and the content identity against each gate.
+
 If Work is required only for qualification after provisional convergence and the
 required Work environment or higher-tier reviewer is unavailable, report the PR
-as provisionally converged but **not qualified**. If Work-only verification still
-blocks provisional convergence, report both convergence and qualification as not
-established. Do not silently weaken the class.
+as provisionally converged but **not qualified**. If a Work-only convergence
+capability still blocks provisional convergence, report both convergence and
+qualification as not established. Do not silently weaken the class.
 
 ## 10. Completion and reporting
 

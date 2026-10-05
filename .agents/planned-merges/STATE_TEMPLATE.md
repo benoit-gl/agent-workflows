@@ -76,6 +76,7 @@ Statuses: `pending`, `accepted`, `superseded`.
 - Required final reviews:
 - Work required:
 - Standard whole-PR qualification (content identity/result):
+- Shared convergence/qualification evidence, if any:
 - Strong targeted qualification (content identity/scope/result):
 - Frontier targeted reconciliation (content identity/scope/result):
 - Stale qualification evidence after PR changes:
