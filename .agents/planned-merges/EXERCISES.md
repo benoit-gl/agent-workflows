@@ -178,4 +178,3 @@ Expected behavior:
 - promote to Q4 only if a consequential Q3 issue remains unresolved or materially
   disputed after Strong-tier analysis; and
 - do not spend Frontier capacity solely because the governing plan changed.
-
