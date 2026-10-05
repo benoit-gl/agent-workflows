@@ -29,7 +29,8 @@ can include:
 - `AGENTS.md` for top-level agent rules;
 - `.agents/pr-reviews/WORKFLOW.md` for workflow semantics;
 - `.agents/pr-reviews/STATE_TEMPLATE.md` for durable review state;
-- `.agents/pr-reviews/README.md` for invocation and exercise guidance;
+- per-workflow `README.md` files for non-normative purpose, design rationale,
+  tradeoffs, known limitations, and usage guidance;
 - `.agents/pr-reviews/adapters/` for environment-specific capability, delivery,
   and model mappings;
 - `.agents/pr-reviews/EXERCISES.md` for affected behavioral scenarios;
@@ -40,6 +41,11 @@ can include:
 
 Update only artifacts whose meaning changes. Do not duplicate a rule into
 unaffected documents merely for symmetry.
+
+Keep per-workflow README files explanatory and non-normative. Put execution
+requirements in the workflow contract or other runtime-loaded files. Do not add a
+per-workflow README to the normal bootstrap load set solely to make rationale
+available during execution.
 
 Keep local Markdown links valid. Repository-local links are checked
 automatically by `npm run check`.

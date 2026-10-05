@@ -1,26 +1,155 @@
-# Using the Planned Merge-Point Workflow
+# Planned Merge-Point Workflow
 
-Read [WORKFLOW.md](WORKFLOW.md) for the lifecycle rules and
-[STATE_TEMPLATE.md](STATE_TEMPLATE.md) for durable orchestration state. The
-workflow uses the existing [PR review workflow](../pr-reviews/WORKFLOW.md) for
-each PR convergence loop.
+This README is explanatory and non-normative. [WORKFLOW.md](WORKFLOW.md) defines
+execution behavior. [STATE_TEMPLATE.md](STATE_TEMPLATE.md) defines durable
+orchestration state, and [EXERCISES.md](EXERCISES.md) defines representative
+behavioral checks.
+
+Normal workflow bootstraps do not load this README. Use it to understand the
+workflow's purpose, design rationale, tradeoffs, and known limitations, or when
+considering a change to the workflow contract.
+
+## Purpose and applicability
+
+Use this workflow to carry one named unit from a repository implementation plan
+through readiness assessment, optional plan repair, implementation, PR
+convergence, and final qualification.
+
+It is useful when a project already has planned merge points, milestones, or
+equivalent implementation units and needs a repeatable way to decide whether a
+unit is ready, implement it without silent scope drift, and qualify the result.
+
+It is not a replacement for the PR review workflow. It uses that workflow for each
+PR convergence loop.
+
+## Design goals
+
+The workflow tries to balance these goals:
+
+- keep planning, implementation, review, qualification, and merge authority
+  distinct;
+- prevent an agent's confidence in its own work from deciding whether stronger
+  review is required;
+- keep routine work in the least expensive capable environment;
+- minimize manual Chat-to-Work transitions that can block progress;
+- keep Work responsible for routine follow-up once a required handoff occurs;
+- stop for human judgment only when a material decision or explicit authority is
+  actually required;
+- distinguish PR convergence from higher-confidence qualification; and
+- remain usable by models with different capability levels without making the
+  canonical execution contract unnecessarily large.
+
+## Design rationale and tradeoffs
+
+### Objective escalation instead of self-assessed confidence
+
+Agents tend to be optimistic about whether their own review has converged. If
+escalation depended only on the current agent deciding that stronger review might
+help, difficult defects could be missed precisely when the agent cannot recognize
+its own limitation.
+
+The workflow therefore uses objective Q0-Q4 triggers. Q2 and above require Work
+and Standard whole-PR qualification. Q3 adds Strong targeted review. Q4 is
+reserved for consequential Q3 uncertainty that remains after Strong analysis.
+
+This can spend more compute than a purely discretionary scheme, but it makes
+escalation depend on observable properties of the work instead of reviewer
+confidence.
+
+### Controlled repetition versus maximum structural deduplication
+
+Critical invariants are stated canonically and then repeated near the action
+points where they matter. This is intentional. Less-capable models can benefit
+from local recency, and a rule repeated close to the relevant decision is less
+likely to be missed than a rule available only in a distant section.
+
+The tradeoff is additional context and a maintenance risk: repeated wording can
+drift. The workflow therefore treats the core invariants as normative and expects
+local repetitions to reinforce, not redefine, them. Behavioral exercises provide
+additional protection, but there is no automated semantic consistency checker.
+
+This choice favors execution reliability over strict DRY structure.
+
+### Minimize human-blocking environment transitions
+
+Switching between Chat and Work is a manual operation. That manual handoff can
+become the slowest part of an otherwise fast autonomous workflow.
+
+The normal path therefore stays in Chat while Chat can satisfy convergence
+requirements, prepares one complete handoff when Work becomes objectively
+required, and then keeps routine fixes and re-review in Work. The goal is at most
+one Chat-to-Work transition per merge point.
+
+This can consume more Work capacity after handoff than repeatedly moving routine
+work back to Chat, but it reduces human-blocking stalls and coordination cost.
+
+### Human gates versus operational stops
+
+A missing capability and a manual environment switch are operational conditions,
+not design decisions. Treating them as human decision gates would create needless
+interruptions.
+
+Human gates are therefore reserved for unresolved material choices, substantial
+plan or scope changes, irreversible or destructive approval, and merge authority.
+Capability blockers and environment handoffs are recorded separately.
+
+### Convergence versus qualification
+
+A PR can converge under the PR review workflow and still require stronger
+qualification because of its semantic risk. Keeping those states separate avoids
+two opposite errors: treating a clean ordinary review as sufficient for every
+change, or forcing high-tier review into every ordinary PR review.
+
+### Repair the plan before coding through ambiguity
+
+When implementation exposes a material gap in the governing plan, silently
+choosing a design in code makes the implementation PR the de facto specification.
+The workflow instead returns substantial ambiguity to planning and records
+unambiguous plan repairs separately.
+
+This adds a planning merge gate, but it keeps architecture and scope decisions in
+the place where future contributors can discover them.
+
+## Relationship to other workflows
+
+The planned merge workflow is an outer orchestration layer.
+
+The PR review workflow owns PR findings, fixing, verification, delivery, and
+convergence. The planned merge workflow owns merge-point readiness, plan repair,
+scope-drift handling, qualification class, environment handoff, and final
+disposition.
+
+The shared model mapping supplies concrete models for portable cost tiers. The
+qualification class decides when stronger tiers are mandatory.
+
+## Known limitations and possible improvements
+
+Current limitations include:
+
+- Q-class thresholds are policy heuristics and have not yet been calibrated
+  against a large set of measured review outcomes;
+- the one-handoff target assumes Chat and Work remain separate environments that
+  require manual switching;
+- controlled repetition can drift because there is no automated semantic
+  consistency check across repeated invariants;
+- runtime capabilities, model mappings, and the relative cost of Chat and Work can
+  change;
+- novel risks may not fit the current objective triggers cleanly; and
+- cost and latency metrics are not always available for evaluating the policy.
+
+Possible future improvements include calibrating qualification classes from
+observed escaped defects and review cost, adding lightweight consistency checks
+for repeated invariants, and simplifying the environment-handoff logic if Chat
+and Work become automatically orchestratable.
+
+## Usage and invocation examples
 
 At the start of a run, resolve the selected `agent-workflows` revision to an
 immutable commit. If the invocation does not select a revision, use the tip of the
 repository's default branch. Load the planned-merge and PR-review workflow files
 and adapters from that same commit.
 
-Chat and Work are interchangeable execution environments. They are not synonyms
-for planning and implementation. The normal cost-conscious path stays in Chat
-through provisional convergence when Chat can satisfy every convergence
-prerequisite. If required verification exists only in Work, hand off once after
-all other Chat-capable convergence work is complete.
-
-For quick reference: Q2 and above require Work and a fresh Standard-tier
-whole-PR qualification. Q3 adds Strong targeted review. Q4 adds Frontier targeted
-reconciliation. Qualification classes never decrease.
-
-## Typical Chat invocation
+### Typical Chat invocation
 
 > Run the planned merge-point workflow from `benoit-gl/agent-workflows` for
 > Step `<x>`, Merge `<y>` in `<owner/repository>`. Use the Chat adapter.
@@ -34,7 +163,7 @@ reconciliation. Qualification classes never decrease.
 > capability blocker. If Work qualification is required, stop only when the Work
 > handoff is complete and ready.
 
-## Typical Work handoff invocation
+### Typical Work handoff invocation
 
 > Continue the planned merge-point workflow for Step `<x>`, Merge `<y>` in
 > `<owner/repository>` using the Work adapter. Re-resolve the current plan and
@@ -43,34 +172,11 @@ reconciliation. Qualification classes never decrease.
 > return routine fixes to Chat. Stop only for a human gate, capability blocker,
 > or completed qualification. Do not merge.
 
-## Starting directly in Work
+### Starting directly in Work
 
-Work can also perform readiness, planning, and implementation from the start.
-When Work is already the active environment, do not introduce a Chat handoff
-merely to follow the default cost path. Continue the same canonical workflow.
+Work can perform readiness, planning, and implementation from the start. When
+Work is already the active environment, do not introduce a Chat handoff merely to
+follow the default cost path. Continue the same canonical workflow.
 
-## Human gates
-
-Human gates require human judgment or authority and are limited to:
-
-- materially different valid choices not settled by repository authority;
-- substantial plan or scope changes;
-- irreversible or destructive choices that require explicit approval; and
-- planning or final merges.
-
-Routine review findings, fixes, tests, documentation propagation, and additional
-review rounds are not human gates. Manual environment handoffs and unavailable
-required capabilities are operational stops; they are not by themselves human
-decisions.
-
-## Qualification summary
-
-The workflow records Q0 through Q4 qualification. Q2 and above require Work and a
-fresh Standard-tier whole-PR qualification, even when Chat review is clean. Q3
-adds a mandatory Strong-tier targeted review. Q4 adds Frontier-tier targeted
-reconciliation after Strong remains inconclusive. Qualification classes never
-decrease.
-
-See [EXERCISES.md](EXERCISES.md) for expected behavior in representative cases
-and [ChatGPT adapters](adapters/chatgpt/README.md) for environment-specific
+See [ChatGPT adapters](adapters/chatgpt/README.md) for environment-specific
 execution.
