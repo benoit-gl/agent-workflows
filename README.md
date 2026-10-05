@@ -48,8 +48,16 @@ The default cost policy keeps work in Chat through provisional convergence when
 Chat can satisfy every convergence prerequisite. If required verification exists
 only in Work, it hands off once after all other Chat-capable convergence work is
 complete. Once that handoff occurs, Work fixes routine findings and continues
-qualification without bouncing work back to Chat. Human intervention
-is reserved for material decisions, scope replanning, and merge gates.
+qualification without bouncing work back to Chat.
+
+Q2 and above require Work and a fresh Standard-tier whole-PR qualification. Q3
+adds Strong targeted review, and Q4 adds Frontier targeted reconciliation.
+Qualification classes never decrease. Human gates require human judgment or
+authority and are limited to materially different valid choices not settled by
+repository authority, substantial plan or scope changes, irreversible or
+destructive approval, and planning or final merges. Manual environment handoffs
+and unavailable capabilities are operational stops, not by themselves human
+decisions.
 
 - [Invocation examples](.agents/planned-merges/README.md)
 - [Workflow state template](.agents/planned-merges/STATE_TEMPLATE.md)

@@ -24,8 +24,12 @@ claiming qualification.
 
 ## Work entry
 
-Work can execute every phase. When it receives a qualification handoff, keep the
-merge point in Work until qualification completes or a true human decision gate
-is reached. Do not return routine fixes to Chat.
+Work can execute every phase. Once Work starts because required verification or
+qualification requires it, keep the merge point in Work through routine fixing,
+verification, and re-review until qualification completes or a stop condition is
+reached. Q2 and above require a fresh Standard-tier whole-PR qualification; Q3
+adds Strong targeted review; Q4 adds Frontier targeted reconciliation.
 
-The environment choice never changes repository authority or merge permission.
+A manual environment handoff and a capability blocker are not by themselves
+human gates. The environment choice never changes repository authority or merge
+permission.

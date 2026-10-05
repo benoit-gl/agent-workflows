@@ -14,6 +14,8 @@ Expected behavior:
 - classify it at least Q2 before final qualification;
 - establish provisional convergence in Chat;
 - prepare one complete Work handoff;
+- classify the manual Chat-to-Work switch as an environment handoff, not a human
+  decision;
 - do not waive Work because Chat is confident; and
 - do not call the PR qualified until a fresh Work whole-PR review passes at
   Standard tier.
@@ -38,6 +40,7 @@ different public lifecycle contracts that the plan does not settle.
 
 Expected behavior:
 
+- classify the unresolved public-contract choice as a human gate;
 - stop qualification;
 - record the unresolved decision and affected scope;
 - return to planning rather than silently selecting a design; and
@@ -123,6 +126,7 @@ Expected behavior:
 
 - report provisional convergence;
 - report the merge point as not qualified;
+- classify Work unavailability as a capability blocker, not a human gate;
 - preserve a complete Work handoff checkpoint; and
 - never downgrade it to Q1 or claim readiness for human merge.
 
@@ -142,6 +146,11 @@ Expected behavior:
   convergence; and
 - perform the fresh Standard-tier whole-PR qualification before calling the merge
   point qualified.
+
+Variant: make Work unavailable before the required integration check can run.
+Expected: report both provisional convergence and qualification as not
+established, record a capability blocker rather than a pending human design
+decision, and preserve the handoff checkpoint.
 
 ## 12. Unpinned planned-merge invocation
 

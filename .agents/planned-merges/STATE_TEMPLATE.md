@@ -97,7 +97,11 @@ A clean review does not reduce the qualification class.
 
 - Current stage:
 - Task status:
-- Next human action:
+- Stop category: `none`, `human gate`, `environment handoff`,
+  `capability blocker`, or `completed qualification`
+- Pending human decision or approval, if any:
+- Next executable action:
+- Next human action, if any:
 - Remaining risks:
 - Blocked capabilities or evidence:
 - Resume checkpoint:

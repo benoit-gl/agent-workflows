@@ -15,6 +15,32 @@ This workflow is an outer orchestration layer. It uses the
 verification, delivery, and convergence. It does not duplicate or weaken that
 workflow.
 
+## Core invariants
+
+These rules are normative. Later sections repeat them at the point of action.
+Those repetitions add local context; they do not weaken or redefine the rules.
+
+- Qualification classes are monotonic: they can only increase during a run.
+- Q2 and above require Work and a fresh Standard-tier whole-PR qualification.
+- Q3 adds a Strong-tier targeted review of the qualifying risk. Q4 adds
+  Frontier-tier targeted reconciliation.
+- Work-only required verification promotes the merge point to at least Q2. If it
+  blocks PR-review convergence, hand off with convergence explicitly not
+  established; never treat unavailable verification as passed.
+- After a Chat-to-Work handoff, stay in Work for routine fixing, verification,
+  and re-review until qualification completes or a stop condition occurs.
+- Human gates require human judgment or authority and are limited to materially
+  different valid choices not settled by repository authority, substantial plan
+  or scope changes, irreversible or destructive approval, and planning or final
+  merges. A manual environment handoff and an unavailable capability are
+  operational stops, not by themselves human decisions.
+- Never merge without a separate explicit user request.
+
+Treat alternatives as materially different when choosing among them changes a
+public or architectural contract, compatibility, dependency strategy, persistent
+representation, security posture, plan-unit boundaries or order, or creates a
+meaningful future-maintenance constraint.
+
 ## 1. Establish authority and durable state
 
 Resolve the selected `agent-workflows` revision to an immutable commit and keep it
@@ -70,10 +96,11 @@ reviewer's confidence that the unit "looks actionable" is not sufficient.
 If readiness fails, do not implement through the ambiguity.
 
 For defects with one clearly implied resolution under existing repository
-authority, revise the plan and affected authoritative documentation. For
-materially different valid designs, interface choices, compatibility decisions,
-dependency choices, security tradeoffs, irreversible changes, or substantial
-scope changes, stop and obtain user direction first.
+authority, revise the plan and affected authoritative documentation. Do not use
+this autonomous repair path for a substantial plan or scope change or for an
+irreversible or destructive choice that requires approval; those remain human
+gates. If more than one materially different valid resolution remains under the
+core definition, stop and obtain user direction before choosing among them.
 
 When planning edits are authorized:
 
@@ -135,8 +162,9 @@ only after the revised plan lands.
 ## 6. Assign an objective qualification class
 
 Classify the merge point before the first implementation review and re-evaluate
-the class after every material scope change. Qualification classes can increase
-during a run. A clean review never lowers the required class.
+the class after every material scope change. Qualification classes are monotonic:
+they can only increase during a run. A clean review never lowers the required
+class.
 
 | Class | Objective trigger                                                                                                                                                                                                                                                       | Required final qualification                                                      |
 | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
@@ -201,10 +229,11 @@ Do not use Work merely because the change is important or because Work is
 available. Use it when an objective qualification requirement or unavailable
 verification capability requires it.
 
-## 8. Run one autonomous Work qualification campaign
+## 8. Run one autonomous Work verification and qualification campaign
 
-Once a merge point enters Work for required qualification, Work owns the complete
-qualification campaign. Do not send routine findings back to Chat to save compute.
+Once a merge point enters Work because required verification or qualification
+requires it, Work owns the rest of the autonomous campaign. Do not send routine
+findings back to Chat to save compute.
 
 Within Work:
 
@@ -224,14 +253,18 @@ Within Work:
 Routine fixing, tests, comments, documentation propagation, and another review
 round are not reasons to stop or return to Chat.
 
-Stop for human intervention only when:
+Stop the autonomous Work campaign only for one of these reasons:
 
-- a material design decision is unresolved by repository authority;
-- scope drift requires replanning, splitting, reordering, or another meaningful
-  plan change;
-- an irreversible or destructive choice requires explicit approval;
-- a required capability is unavailable; or
-- qualification is complete and the PR is ready for human acceptance and merge.
+- **Human gate:** a materially different valid choice is unresolved by repository
+  authority; scope drift requires a substantial plan or scope change; an
+  irreversible or destructive choice requires explicit approval; or a planning
+  or final merge requires human authority.
+- **Capability blocker:** a required capability is unavailable.
+- **Completed qualification:** qualification is complete and the PR is ready for
+  human acceptance and merge.
+
+Do not report a capability blocker as a pending human decision unless the human
+must choose how to resolve it.
 
 The Work adapter must not spend Strong or Frontier capacity merely because the
 current agent thinks more intelligence could help. Higher tiers are used when
@@ -263,11 +296,12 @@ established. Do not silently weaken the class.
 
 ## 10. Completion and reporting
 
-A planned merge-point run stops at one of four states:
+A planned merge-point run stops at one of five states:
 
-- **awaiting planning decision**;
+- **awaiting human decision or approval**;
 - **awaiting human planning merge**;
-- **awaiting qualification capability or environment handoff**; or
+- **awaiting required environment handoff**;
+- **blocked on required capability**; or
 - **ready for human implementation merge**.
 
 Report:
@@ -282,8 +316,10 @@ Report:
 - mandatory higher-tier reviews actually performed;
 - accepted user decisions;
 - remaining risks or blocked evidence; and
-- the exact next human action.
+- the exact next action, including any required human action.
 
 Never claim completion merely because the current reviewer found no further
 issues. Completion is determined by the recorded readiness, convergence, and
-qualification invariants.
+qualification invariants. A capability blocker can stop execution without
+creating a human decision; report the missing capability and the exact resume
+condition separately.

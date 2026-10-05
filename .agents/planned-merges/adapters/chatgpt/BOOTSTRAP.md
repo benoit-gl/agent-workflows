@@ -33,8 +33,10 @@ Inspect actual repository, PR, write, check, local-workspace, and fresh-context
 capabilities needed by the current phase. Reuse the matching PR-review adapter's
 delivery route for every inner `update-pr` run.
 
-Do not infer Work availability from model availability. Do not claim a Q2+
-merge point qualified unless its required Work campaign actually ran.
+Do not infer Work availability from model availability. Q2 and above require Work
+and a fresh Standard-tier whole-PR qualification. Q3 adds Strong targeted review.
+Q4 adds Frontier targeted reconciliation. Do not weaken these thresholds because
+the current reviewer is confident.
 
 Use the shared portable tier mapping from
 [the PR review model mapping](../../../pr-reviews/adapters/chatgpt/MODELS.md).
