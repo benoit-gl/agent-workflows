@@ -16,9 +16,11 @@ tip of the repository's default branch. At that exact commit, read:
 - `.agents/pr-reviews/STATE_TEMPLATE.md`;
 - `.agents/pr-reviews/adapters/chatgpt/BOOTSTRAP.md`;
 - `.agents/pr-reviews/adapters/chatgpt/MODELS.md`; and
-- exactly one planned-merge adapter plus the matching PR-review adapter:
-  `CHAT.md` and `pr-reviews/.../CHAT.md`, or `WORK.md` and
-  `pr-reviews/.../WORK.md`.
+- exactly one environment-matched adapter pair:
+  `.agents/planned-merges/adapters/chatgpt/CHAT.md` and
+  `.agents/pr-reviews/adapters/chatgpt/CHAT.md`, or
+  `.agents/planned-merges/adapters/chatgpt/WORK.md` and
+  `.agents/pr-reviews/adapters/chatgpt/WORK.md`.
 
 Record the commit and environment in planned-merge state. Keep that instruction
 revision fixed for the session.
@@ -34,9 +36,10 @@ capabilities needed by the current phase. Reuse the matching PR-review adapter's
 delivery route for every inner `update-pr` run.
 
 Do not infer Work availability from model availability. Q2 and above require Work
-and a fresh Standard-tier whole-PR qualification. Q3 adds Strong targeted review.
-Q4 adds Frontier targeted reconciliation. Do not weaken these thresholds because
-the current reviewer is confident.
+and a fresh Standard-tier whole-PR qualification in a fresh reviewer context; the
+PR-review same-context surrogate does not satisfy this outer qualification. Q3
+adds Strong targeted review. Q4 adds Frontier targeted reconciliation. Do not
+weaken these thresholds because the current reviewer is confident.
 
 Use the shared portable tier mapping from
 [the PR review model mapping](../../../pr-reviews/adapters/chatgpt/MODELS.md).

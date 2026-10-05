@@ -178,3 +178,34 @@ Expected behavior:
 - promote to Q4 only if a consequential Q3 issue remains unresolved or materially
   disputed after Strong-tier analysis; and
 - do not spend Frontier capacity solely because the governing plan changed.
+
+## 14. Fresh Q2 reviewer context unavailable
+
+A Q2 implementation is provisionally converged and Work is available, but the
+runtime cannot start a fresh reviewer context. It can only perform a same-context
+neutral re-read.
+
+Expected behavior:
+
+- do not count the same-context surrogate as the mandatory Q2 qualification;
+- preserve provisional convergence if its evidence remains current;
+- report qualification blocked on the missing fresh-reviewer capability;
+- preserve the exact PR identity and resume action; and
+- complete qualification only after a fresh Standard-tier whole-PR reviewer can
+  assess the current content in Work.
+
+## 15. Qualification fixes change the reviewed content
+
+A Q3 implementation reaches Work. The Standard whole-PR qualification passes on
+head H1. The Strong targeted review then finds an accepted P2 in the qualifying
+risk surface, and the fix produces head H2.
+
+Expected behavior:
+
+- record H2 as the new qualification content identity;
+- treat the H1 Standard whole-PR result as stale and rerun it on H2;
+- rerun the Strong targeted review because its risk surface changed;
+- preserve only qualification evidence whose reviewed scope is proven unaffected;
+  and
+- do not mark the merge point qualified until every mandatory review applies to
+  the current PR content.

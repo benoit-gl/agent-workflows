@@ -21,7 +21,9 @@ These rules are normative. Later sections repeat them at the point of action.
 Those repetitions add local context; they do not weaken or redefine the rules.
 
 - Qualification classes are monotonic: they can only increase during a run.
-- Q2 and above require Work and a fresh Standard-tier whole-PR qualification.
+- Q2 and above require Work and a fresh Standard-tier whole-PR qualification in
+  a fresh reviewer context. A same-context surrogate cannot satisfy this
+  qualification.
 - Q3 adds a Strong-tier targeted review of the qualifying risk. Q4 adds
   Frontier-tier targeted reconciliation.
 - Work-only required verification promotes the merge point to at least Q2. If it
@@ -187,9 +189,12 @@ Additional mandatory promotions:
 - If a newly accepted finding introduces a Q2, Q3, or Q4 trigger, immediately
   raise the class before further qualification.
 
-For Q2 and above, the fresh Work review is required even when all Chat reviews
-are clean. This rule prevents the current agent's confidence from deciding
-whether stronger independent qualification is necessary.
+For Q2 and above, "fresh" means a fresh reviewer context under the PR review
+workflow's fresh-review rules. A same-context surrogate can support investigation,
+but it cannot satisfy the mandatory qualification. The fresh Work review is
+required even when all Chat reviews are clean. This rule prevents the current
+agent's confidence from deciding whether stronger independent qualification is
+necessary.
 
 The PR review workflow still owns finding semantics and convergence. Q3 and Q4
 add targeted higher-tier qualification; they do not require repeating the entire
@@ -243,14 +248,19 @@ Within Work:
 2. If provisional convergence was blocked only by Work-only verification, run
    that verification and resume the PR review workflow until provisional
    convergence is established.
-3. Run the required fresh whole-PR qualification at Standard tier.
+3. Run the required fresh whole-PR qualification at Standard tier in a fresh
+   reviewer context.
 4. Run any mandatory Q3 or Q4 targeted review even if the Standard review is
    clean.
 5. Triage findings under the PR review workflow.
 6. Fix accepted findings that do not require a material user decision.
 7. Re-run focused verification, integration checks, policy audit, and fresh
    review as required.
-8. Update the existing implementation PR and continue until qualified.
+8. After any fix or other PR-content change, record the new content identity and
+   re-evaluate qualification evidence. Mark evidence stale when its reviewed
+   content or scoped risk surface changed. Always rerun the Standard whole-PR
+   qualification on the new complete content before marking Q2+ qualified.
+9. Update the existing implementation PR and continue until qualified.
 
 Routine fixing, tests, comments, documentation propagation, and another review
 round are not reasons to stop or return to Chat.

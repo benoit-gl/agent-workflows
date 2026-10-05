@@ -75,13 +75,16 @@ Statuses: `pending`, `accepted`, `superseded`.
 - Promotions and reasons:
 - Required final reviews:
 - Work required:
-- Standard whole-PR qualification:
-- Strong targeted qualification:
-- Frontier targeted reconciliation:
+- Standard whole-PR qualification (content identity/result):
+- Strong targeted qualification (content identity/scope/result):
+- Frontier targeted reconciliation (content identity/scope/result):
+- Stale qualification evidence after PR changes:
 - Qualification status: `not started`, `in progress`, `blocked`, or
   `qualified`
 
-A clean review does not reduce the qualification class.
+A clean review does not reduce the qualification class. Bind qualification
+evidence to the reviewed content and re-evaluate it after every implementation
+PR-content change.
 
 ## Environment handoff
 
