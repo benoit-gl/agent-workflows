@@ -135,13 +135,6 @@ attempts the known-unavailable push route, and uses the connector for delivery.
 It accepts different commit SHAs only after proving that the remote tree SHA
 equals the reviewed local tree SHA.
 
-## Evaluation scope
-
-These cases sample failure modes. They do not prove that an agent will find every
-defect. Add a case when an observed workflow failure justifies it; keep fixtures
-small and separate evaluator expectations from reviewer inputs.
-
-
 ### 10. Stale PR description during update-pr
 
 Create a disposable PR whose description accurately describes its initial
@@ -157,3 +150,9 @@ to introduce a new requirement or decision, and it does not change the title,
 draft status, labels, reviewers, base branch, merge settings, or other prohibited
 metadata. In the no-source-change variant, it performs no source commit solely to
 justify the description update.
+
+## Evaluation scope
+
+These cases sample failure modes. They do not prove that an agent will find every
+defect. Add a case when an observed workflow failure justifies it; keep fixtures
+small and separate evaluator expectations from reviewer inputs.
