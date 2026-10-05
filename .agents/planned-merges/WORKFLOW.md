@@ -133,13 +133,13 @@ Classify the merge point before the first implementation review and re-evaluate
 the class after every material scope change. Qualification classes can increase
 during a run. A clean review never lowers the required class.
 
-| Class | Objective trigger | Required final qualification |
-| ----- | ----------------- | ---------------------------- |
-| Q0 | Documentation or mechanical change with no behavioral contract change | Current environment; normal PR convergence |
-| Q1 | Localized implementation of an existing contract with deterministic verification and none of the Q2+ triggers | Fresh stability confirmation in the current environment |
-| Q2 | Cross-module semantic change; persistence, serialization, or reload; concurrency or replication; lifecycle or identity semantics; public API or compatibility surface; material architectural boundary; or an important verification-oracle limitation | Fresh whole-PR qualification in Work at Standard tier |
-| Q3 | Security boundary, credible data-loss risk, irreversible migration or format decision, difficult distributed/concurrency semantics, candidate or architecture selection, an accepted P1, or multiple accepted P2 findings that span distinct components or broad rounds | Q2 requirements plus a Strong-tier targeted review of the qualifying risk surface |
-| Q4 | A consequential Q3 issue remains unresolved or materially disputed after Strong-tier analysis | Q3 requirements plus Frontier-tier targeted reconciliation |
+| Class | Objective trigger                                                                                                                                                                                                                                                       | Required final qualification                                                      |
+| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Q0    | Documentation or mechanical change with no behavioral contract change                                                                                                                                                                                                   | Current environment; normal PR convergence                                        |
+| Q1    | Localized implementation of an existing contract with deterministic verification and none of the Q2+ triggers                                                                                                                                                           | Fresh stability confirmation in the current environment                           |
+| Q2    | Cross-module semantic change; persistence, serialization, or reload; concurrency or replication; lifecycle or identity semantics; public API or compatibility surface; material architectural boundary; or an important verification-oracle limitation                  | Fresh whole-PR qualification in Work at Standard tier                             |
+| Q3    | Security boundary, credible data-loss risk, irreversible migration or format decision, difficult distributed/concurrency semantics, candidate or architecture selection, an accepted P1, or multiple accepted P2 findings that span distinct components or broad rounds | Q2 requirements plus a Strong-tier targeted review of the qualifying risk surface |
+| Q4    | A consequential Q3 issue remains unresolved or materially disputed after Strong-tier analysis                                                                                                                                                                           | Q3 requirements plus Frontier-tier targeted reconciliation                        |
 
 Additional mandatory promotions:
 
