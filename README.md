@@ -35,3 +35,22 @@ names or agent presets.
 A completed review may report unresolved findings. Solution convergence and
 verified remote delivery are separate outcomes defined by the workflow. This
 process does not replace CI, branch protection, or human acceptance and merge.
+
+## Planned merge points
+
+[WORKFLOW.md](.agents/planned-merges/WORKFLOW.md) orchestrates a repository plan
+unit from readiness assessment through implementation and final qualification.
+It treats Chat and Work as interchangeable execution environments, keeps the PR
+review workflow as the inner convergence engine, and uses objective qualification
+classes to require stronger independent review when the change warrants it.
+
+The default cost policy keeps work in Chat through provisional convergence and
+uses at most one Chat-to-Work handoff for merge points that require Work
+qualification. Once that handoff occurs, Work fixes routine findings and
+continues qualification without bouncing work back to Chat. Human intervention
+is reserved for material decisions, scope replanning, and merge gates.
+
+- [Invocation examples](.agents/planned-merges/README.md)
+- [Workflow state template](.agents/planned-merges/STATE_TEMPLATE.md)
+- [Behavioral exercises](.agents/planned-merges/EXERCISES.md)
+- [ChatGPT adapters](.agents/planned-merges/adapters/chatgpt/README.md)

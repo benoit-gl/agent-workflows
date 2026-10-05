@@ -1,0 +1,102 @@
+# Planned Merge State: <repository / plan unit>
+
+Keep this record concise and evidence-based. Do not copy raw transcripts or large
+logs into it.
+
+## Authority and identity
+
+- Workflow source/revision:
+- Environment adapter:
+- Target repository:
+- Target branch/ref:
+- Planned merge point:
+- Governing plan path/revision:
+- Requested phase/work:
+- Authorized writes:
+- Forbidden actions:
+- Current environment:
+- State last checked against revision:
+
+## Repository decisions and governance
+
+| ID | Status | Decision or invariant | Governing source | Rationale or user direction |
+| -- | ------ | --------------------- | ---------------- | --------------------------- |
+| D-001 | accepted | | | |
+
+Statuses: `pending`, `accepted`, `superseded`.
+
+## Readiness gate
+
+| Criterion | Status | Evidence |
+| --------- | ------ | -------- |
+| Prerequisites landed | | |
+| Observable behavior and exclusions clear | | |
+| Material design choices settled | | |
+| Verification/evidence identified | | |
+| Plan consistent with current repository | | |
+| Scope is one coherent merge unit | | |
+
+- Readiness result: `ready`, `not ready`, or `blocked`
+- Required plan repairs:
+- Pending user decisions:
+
+## Planning repair
+
+- Planning branch:
+- Planning PR:
+- Planning PR head:
+- PR-review convergence:
+- Human merge status:
+- Revised plan revision after merge:
+
+## Implementation
+
+- Implementation branch:
+- Implementation PR:
+- Implementation PR head:
+- Changed scope:
+- Required tests/evidence:
+- Provisional convergence: `not established` or `converged`
+- Current PR-review state/evidence:
+
+## Scope drift
+
+- Drift detected:
+- Trigger:
+- Can existing authority settle it:
+- Plan split/reorder/revision required:
+- Disposition:
+
+## Qualification
+
+- Qualification class: `Q0`, `Q1`, `Q2`, `Q3`, or `Q4`
+- Objective triggers:
+- Promotions and reasons:
+- Required final reviews:
+- Work required:
+- Standard whole-PR qualification:
+- Strong targeted qualification:
+- Frontier targeted reconciliation:
+- Qualification status: `not started`, `in progress`, `blocked`, or
+  `qualified`
+
+A clean review does not reduce the qualification class.
+
+## Environment handoff
+
+- Environment history:
+- Chat-to-Work transitions:
+- One-transition target met:
+- Handoff-ready criteria:
+- Exact handoff content identity:
+- Resume action:
+- Handoff blocker:
+
+## Current disposition
+
+- Current stage:
+- Task status:
+- Next human action:
+- Remaining risks:
+- Blocked capabilities or evidence:
+- Resume checkpoint:
