@@ -22,8 +22,9 @@ template, and model mapping from that same commit.
 > SHA. From that commit, load and follow
 > `.agents/pr-reviews/adapters/chatgpt/BOOTSTRAP.md`, selecting
 > `.agents/pr-reviews/adapters/chatgpt/CHAT.md` from the same commit as the
-> environment adapter. Use `update-pr` delivery. Do not force-update, approve,
-> close, enable auto-merge, change PR state, or merge.
+> environment adapter. Use `update-pr` delivery and keep the PR description
+> accurate when required by the canonical workflow. Do not change the PR title,
+> force-update, approve, close, enable auto-merge, change PR state, or merge.
 
 ## Work invocation
 
@@ -32,8 +33,9 @@ template, and model mapping from that same commit.
 > SHA. From that commit, load and follow
 > `.agents/pr-reviews/adapters/chatgpt/BOOTSTRAP.md`, selecting
 > `.agents/pr-reviews/adapters/chatgpt/WORK.md` from the same commit as the
-> environment adapter. Use `update-pr` delivery. Do not force-update, approve,
-> close, enable auto-merge, change PR state, or merge.
+> environment adapter. Use `update-pr` delivery and keep the PR description
+> accurate when required by the canonical workflow. Do not change the PR title,
+> force-update, approve, close, enable auto-merge, change PR state, or merge.
 
 The core workflow remains authoritative for modes, governance, findings,
 verification, and completion. These files describe only how ChatGPT satisfies

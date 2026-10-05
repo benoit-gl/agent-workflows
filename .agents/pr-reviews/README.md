@@ -80,6 +80,18 @@ from the committed or remotely tested tree.
 This makes delivery more careful than a simple sequence of file updates, but it
 keeps review evidence tied to the artifact that will actually be merged.
 
+### PR description maintenance
+
+Repository policy can treat the PR description as durable documentation or as the
+future squash-commit message. Accepted fixes can therefore make a previously
+accurate description stale.
+
+`update-pr` includes narrow authority to keep that description accurate without
+requiring another human approval. The authority is intentionally limited to the
+body: it does not include the PR title, lifecycle state, reviewers, labels, base
+branch, or merge controls, and it cannot be used to introduce new requirements or
+decisions.
+
 ### Cost tiers and bounded review rounds
 
 Routine extraction, verification, and ordinary review use lower-cost tiers.
@@ -132,9 +144,11 @@ explicitly if needed. Findings can remain unresolved when the review is complete
 
 > Run the iterative PR review workflow from `benoit-gl/agent-workflows` on PR
 > `<number>` in `<owner/repository>`. Use `update-pr` delivery and the environment
-> adapter selected for your runtime. Apply accepted fixes and deliver the exact
-> reviewed tree to the existing head branch. Do not force-update, approve, close,
-> enable auto-merge, change PR state, or merge.
+> adapter selected for your runtime. Apply accepted fixes, deliver the exact
+> reviewed tree to the existing head branch, and keep the PR description accurate
+> when the final accepted change makes it materially stale. Do not change the PR
+> title, force-update, approve, close, enable auto-merge, change PR state, or
+> merge.
 
 ### Local fixes
 

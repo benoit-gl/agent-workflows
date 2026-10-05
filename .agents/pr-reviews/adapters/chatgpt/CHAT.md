@@ -39,7 +39,10 @@ After the canonical workflow has accepted and verified the candidate:
 4. Create one commit with the current PR head as its parent and advance only the
    existing PR head ref with a non-force update.
 5. Confirm that the PR now points to the delivered commit and exact reviewed
-   tree, then verify the authoritative required-check target.
+   tree. If the canonical workflow requires PR-description maintenance, use the
+   authenticated repository connector to update only the body and verify that
+   prohibited metadata did not change.
+6. Verify the authoritative required-check target.
 
 Do not simulate a coherent delivery with sequential per-file commits or a series
 of partially visible file updates. Do not use a browser UI for delivery when the

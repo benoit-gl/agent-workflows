@@ -140,3 +140,20 @@ equals the reviewed local tree SHA.
 These cases sample failure modes. They do not prove that an agent will find every
 defect. Add a case when an observed workflow failure justifies it; keep fixtures
 small and separate evaluator expectations from reviewer inputs.
+
+
+### 10. Stale PR description during update-pr
+
+Create a disposable PR whose description accurately describes its initial
+change. During an authorized `update-pr` review, accept and deliver a fix that
+materially changes the final behavior so the original description becomes
+incomplete. In a variant, keep the source head unchanged but make the description
+stale relative to the already accepted PR content.
+
+Expected: the agent updates the PR description autonomously so it accurately
+summarizes the final accepted change. It preserves accurate links, issue
+references, checklists, and attribution where practical. It does not use the body
+to introduce a new requirement or decision, and it does not change the title,
+draft status, labels, reviewers, base branch, merge settings, or other prohibited
+metadata. In the no-source-change variant, it performs no source commit solely to
+justify the description update.

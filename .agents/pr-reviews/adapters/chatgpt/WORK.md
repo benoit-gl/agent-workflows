@@ -43,7 +43,10 @@ After the canonical workflow has accepted and verified the local candidate:
    differ; tree identity is the content gate.
 4. Create one remote commit with the current PR head as its parent and advance
    only the existing PR head ref with a non-force update.
-5. Confirm that the PR points to the delivered commit and reviewed tree, then
-   verify the authoritative required-check target.
+5. Confirm that the PR points to the delivered commit and reviewed tree. If the
+   canonical workflow requires PR-description maintenance, use the authenticated
+   repository connector to update only the body and verify that prohibited
+   metadata did not change.
+6. Verify the authoritative required-check target.
 
 Do not fall back to browser editing, sequential per-file commits, or `git push`.

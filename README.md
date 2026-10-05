@@ -21,8 +21,9 @@ reviews, and verification of the exact content delivered.
 Example:
 
 > Review PR 19 using the PR review workflow from `benoit-gl/agent-workflows`.
-> Use `update-pr` delivery: apply accepted fixes and deliver the reviewed tree
-> to the existing PR head. Do not force-update it, change PR state, or merge.
+> Use `update-pr` delivery: apply accepted fixes, deliver the reviewed tree to
+> the existing PR head, and keep the PR description accurate. Do not change the
+> PR title, force-update it, change PR state, or merge.
 
 Load the workflow explicitly when your runtime does not load remote instructions.
 Resolve the selected workflow revision to a commit SHA, using the repository's
