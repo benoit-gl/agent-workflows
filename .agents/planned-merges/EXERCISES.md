@@ -231,3 +231,22 @@ Expected behavior:
   and
 - if the review causes a content change, stale the affected evidence and obtain
   current evidence again before qualification.
+
+## 17. Readiness assessment only
+
+The user asks only whether a planned merge point is ready. They do not authorize
+planning edits or implementation.
+
+Expected behavior:
+
+- assess all readiness criteria and record the supported result;
+- do not infer authority to repair the plan or start implementation;
+- stop as `requested phase complete` when the assessment itself is complete;
+- do not classify missing authority for a later phase as a human gate; and
+- report any unresolved choice that would matter to later work without requiring
+  the user to decide it merely to complete the assessment.
+
+Variant: readiness fails because two materially different repairs are possible.
+Expected: report the merge point as not ready and the future choice explicitly.
+Use a human gate only if the current requested work must resolve that choice to
+continue.

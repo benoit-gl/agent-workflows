@@ -59,8 +59,10 @@ adds Strong targeted review, and Q4 adds Frontier targeted reconciliation.
 Qualification classes never decrease. Human gates require human judgment or
 authority and are limited to materially different valid choices not settled by
 repository authority, substantial plan or scope changes, irreversible or
-destructive approval, and planning or final merges. Manual environment handoffs
-and unavailable capabilities are operational stops, not by themselves human
+destructive approval, and planning or final merges. Completing an explicitly
+requested phase is normal task completion; lack of authority for an unrequested
+later phase is not by itself a human gate. Manual environment handoffs and
+unavailable capabilities are operational stops, not by themselves human
 decisions.
 
 - [Invocation examples](.agents/planned-merges/README.md)

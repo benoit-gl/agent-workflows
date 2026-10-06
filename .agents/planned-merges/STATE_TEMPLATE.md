@@ -101,8 +101,9 @@ PR-content change.
 
 - Current stage:
 - Task status:
-- Stop category: `none`, `human gate`, `environment handoff`,
-  `capability blocker`, or `completed qualification`
+- Requested phase completion result:
+- Stop category: `none`, `requested phase complete`, `human gate`,
+  `environment handoff`, `capability blocker`, or `completed qualification`
 - Pending human decision or approval, if any:
 - Next executable action:
 - Next human action, if any:

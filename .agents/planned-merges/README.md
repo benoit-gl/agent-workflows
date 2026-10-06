@@ -102,6 +102,12 @@ Human gates are therefore reserved for unresolved material choices, substantial
 plan or scope changes, irreversible or destructive approval, and merge authority.
 Capability blockers and environment handoffs are recorded separately.
 
+Completing the phase the user actually requested is also a normal terminal
+condition. A readiness-only run can report its result and stop without asking for
+permission to implement. An unresolved choice that matters only to a later,
+unrequested phase is recorded for that future work; it becomes a human gate only
+when the active requested work must cross it.
+
 ### Convergence versus qualification
 
 A PR can converge under the PR review workflow and still require stronger

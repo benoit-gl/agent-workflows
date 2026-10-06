@@ -39,6 +39,8 @@ Those repetitions add local context; they do not weaken or redefine the rules.
   or scope changes, irreversible or destructive approval, and planning or final
   merges. A manual environment handoff and an unavailable capability are
   operational stops, not by themselves human decisions.
+- Completing the explicitly requested phase is normal task completion. Lack of
+  authority for an unrequested later phase is not by itself a human gate.
 - Never merge without a separate explicit user request.
 
 Treat alternatives as materially different when choosing among them changes a
@@ -105,7 +107,10 @@ authority, revise the plan and affected authoritative documentation. Do not use
 this autonomous repair path for a substantial plan or scope change or for an
 irreversible or destructive choice that requires approval; those remain human
 gates. If more than one materially different valid resolution remains under the
-core definition, stop and obtain user direction before choosing among them.
+core definition, do not choose among them. If the requested work must resolve the
+choice to continue, stop at a human gate and obtain user direction. An
+assessment-only request can instead complete with readiness not established and
+record the unresolved choice for any later phase.
 
 When planning edits are authorized:
 
@@ -325,13 +330,22 @@ qualification as not established. Do not silently weaken the class.
 
 ## 10. Completion and reporting
 
-A planned merge-point run stops at one of five states:
+A planned merge-point run stops at one of six states:
 
+- **requested phase complete**;
 - **awaiting human decision or approval**;
 - **awaiting human planning merge**;
 - **awaiting required environment handoff**;
 - **blocked on required capability**; or
 - **ready for human implementation merge**.
+
+Use **requested phase complete** when the explicitly requested phase has reached
+its result and no later phase is part of the current authority. For example, a
+readiness-only request can finish after recording a supported `ready`,
+`not ready`, or `blocked` result. Do not turn missing authority for an
+unrequested planning or implementation phase into a human gate. If the requested
+phase itself cannot complete without a material decision or approval, use the
+human-gate state instead.
 
 Report:
 
