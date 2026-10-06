@@ -121,6 +121,13 @@ When planning edits are authorized:
    converges.
 4. Stop at the human merge gate.
 
+If that planning PR cannot converge in Chat because a required PR-review
+capability is available only in Work, use the section 7 environment handoff with
+the planning PR as the active PR. Work completes the missing capability, resumes
+the inner PR-review loop to convergence, and then stops at the human planning
+merge gate. Do not require an implementation PR or qualification state for this
+planning-phase handoff.
+
 After the planning PR is merged, resume from the new target-branch state and run
 the readiness gate again. Do not let an implementation branch silently depend on
 an unmerged planning change.
@@ -234,13 +241,18 @@ A Work handoff is ready only when:
 
 - the planned scope is stable;
 - no material user decision is pending;
-- the implementation PR exists and its current head is identified;
-- provisional convergence is established, or it is blocked only by a required
-  convergence capability that is available in Work;
+- the active PR for the current phase exists and its current head is identified:
+  the planning PR during plan repair, or the implementation PR during
+  implementation;
+- during plan repair, planning-PR convergence is blocked only by a required
+  capability that is available in Work; during implementation, provisional
+  convergence is established or is blocked only by such a capability;
 - all review and verification work that Chat can perform or authoritatively
-  observe is complete, and every Work-only convergence blocker is identified; and
-- the state record contains the qualification class, reasons, convergence status
-  or blocker, remaining mandatory reviews, and exact resume action.
+  observe for the active PR is complete, and every Work-only convergence blocker
+  is identified; and
+- the state record contains the active phase, active PR and head, convergence
+  status or blocker, and exact resume action. For implementation, it also contains
+  the qualification class, reasons, and remaining mandatory reviews.
 
 Do not use Work merely because the change is important or because Work is
 available. Use it when an objective qualification requirement or unavailable
@@ -248,9 +260,16 @@ convergence capability requires it.
 
 ## 8. Run one autonomous Work verification and qualification campaign
 
-Once a merge point enters Work because a required convergence capability or
-qualification requires it, Work owns the rest of the autonomous campaign. Do not
-send routine findings back to Chat to save compute.
+If Work receives a planning-phase handoff, re-resolve the planning PR, complete
+the missing convergence capability, and resume the PR review workflow in
+`update-pr` mode until the planning PR converges. Then stop at the human planning
+merge gate. Do not require implementation qualification state and do not start
+implementation before the revised plan lands.
+
+The remaining campaign applies to implementation PRs. Once an implementation PR
+enters Work because a required convergence capability or qualification requires
+it, Work owns the rest of the autonomous campaign. Do not send routine findings
+back to Chat to save compute.
 
 Within Work:
 

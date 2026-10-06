@@ -48,8 +48,11 @@ classes to require stronger independent review when the change warrants it.
 The default cost policy keeps work in Chat through provisional convergence when
 Chat can satisfy every convergence prerequisite. If a required convergence
 capability exists only in Work, including a fresh reviewer context, it hands off
-once after all other Chat-capable convergence work is complete. Once that handoff
-occurs, Work fixes routine findings and continues qualification without bouncing
+once after all other Chat-capable convergence work is complete. A planning PR
+uses that same handoff when its convergence is blocked by a Work-only capability;
+it does not wait for an implementation PR. Work finishes the planning PR
+convergence loop and stops at the planning-merge gate. For an implementation
+handoff, Work fixes routine findings and continues qualification without bouncing
 work back to Chat. When one fresh Standard-tier Work whole-PR review on unchanged
 content satisfies both the convergence and Q2+ qualification contracts, the same
 review is recorded for both instead of being repeated.

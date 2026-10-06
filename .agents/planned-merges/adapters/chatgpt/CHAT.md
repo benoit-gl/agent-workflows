@@ -7,7 +7,14 @@ Chat supports readiness assessment, planning edits, implementation, PR updates,
 verification, and provisional convergence when the available repository tools are
 sufficient. Repository and PR delivery follows the PR-review Chat adapter.
 
-## Qualification handoff
+## Convergence and qualification handoff
+
+If a planning PR cannot converge because a required PR-review capability is
+unavailable in Chat but available in Work, complete all other Chat-capable review
+and verification, then prepare a planning-phase handoff with the planning PR and
+head, the remaining blocker, and the exact resume action. Do not require an
+implementation PR or qualification class. Work resumes the planning PR review and
+stops at the human planning-merge gate.
 
 Q2 and above require Work and a fresh Standard-tier whole-PR qualification. Q3
 adds Strong targeted review. Q4 adds Frontier targeted reconciliation. When Work

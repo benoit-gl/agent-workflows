@@ -33,17 +33,22 @@ Use Chat as the normal cost-conscious environment for readiness, planning, and
 implementation. Stay through provisional convergence when Chat can satisfy every
 convergence prerequisite. If a required convergence capability exists only in
 Work, including a fresh reviewer context, complete all other Chat-capable work,
-prepare the handoff, and stop without claiming convergence. If the recorded class
-otherwise requires Work after convergence, prepare the qualification handoff and
-stop without claiming qualification.
+prepare the handoff, and stop without claiming convergence. For a planning PR,
+use that planning PR as the active handoff PR; an implementation PR and
+qualification class are not prerequisites. If the recorded class otherwise
+requires Work after implementation convergence, prepare the qualification handoff
+and stop without claiming qualification.
 
 ## Work entry
 
-Work can execute every phase. Once Work starts because a required convergence
-capability or qualification requires it, keep the merge point in Work through
-routine fixing, verification, and re-review until qualification completes or a
-stop condition is reached. Q2 and above require a fresh Standard-tier whole-PR
-qualification; reuse a convergence-closing Work review when it independently
+Work can execute every phase. For a planning-phase handoff, finish the planning
+PR convergence loop and stop at the human planning-merge gate before
+implementation. For an implementation handoff, once Work starts because a
+required convergence capability or qualification requires it, keep the merge
+point in Work through routine fixing, verification, and re-review until
+qualification completes or a stop condition is reached. Q2 and above require a
+fresh Standard-tier whole-PR qualification; reuse a convergence-closing Work
+review when it independently
 satisfies that same qualification contract. Q3 adds Strong targeted review; Q4
 adds Frontier targeted reconciliation.
 

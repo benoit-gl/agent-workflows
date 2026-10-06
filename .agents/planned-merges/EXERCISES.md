@@ -250,3 +250,20 @@ Variant: readiness fails because two materially different repairs are possible.
 Expected: report the merge point as not ready and the future choice explicitly.
 Use a human gate only if the current requested work must resolve that choice to
 continue.
+
+## 18. Planning PR needs a Work-only convergence capability
+
+Readiness finds one unambiguous plan repair. Chat creates the planning PR and
+completes all review work it can perform, but target-repository policy requires a
+review capability that Chat lacks and Work provides. No implementation PR exists
+yet.
+
+Expected behavior:
+
+- keep the planning PR explicitly not converged in Chat;
+- prepare a Work handoff with the planning PR and current head as the active PR;
+- do not require an implementation PR or qualification class for the handoff;
+- in Work, complete the missing capability and resume the planning PR
+  `update-pr` loop to convergence;
+- stop at the human planning-merge gate after that convergence; and
+- do not start implementation before the revised plan lands.

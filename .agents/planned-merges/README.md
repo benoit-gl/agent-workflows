@@ -176,23 +176,28 @@ and adapters from that same commit.
 > Step `<x>`, Merge `<y>` in `<owner/repository>`. Use the Chat adapter.
 > Assess readiness against the current repository. If the plan needs an
 > unambiguous repair and planning edits are authorized, create a documentation
-> draft PR and run `update-pr` to convergence. Otherwise implement the ready
-> merge point, create a draft implementation PR, and run `update-pr` toward
-> provisional convergence. If a required convergence capability exists only in
-> Work, including a required fresh reviewer context, complete all other
-> Chat-capable convergence work and record that blocker in the handoff instead of
-> treating it as passed. Stop for a human gate or
-> capability blocker. If Work qualification is required, stop only when the Work
-> handoff is complete and ready.
+> draft PR and run `update-pr` toward convergence. If that planning PR is blocked
+> only by a required capability available in Work, hand it off as the active PR;
+> do not require an implementation PR or qualification class. Otherwise stop at
+> the human planning-merge gate when it converges. If no plan repair is needed,
+> implement the ready merge point, create a draft implementation PR, and run
+> `update-pr` toward provisional convergence. If a required implementation
+> convergence capability exists only in Work, including a required fresh reviewer
+> context, complete all other Chat-capable convergence work and record that
+> blocker in the handoff instead of treating it as passed. Stop for a human gate
+> or capability blocker. If Work qualification is required, stop only when the
+> Work handoff is complete and ready.
 
 ### Typical Work handoff invocation
 
 > Continue the planned merge-point workflow for Step `<x>`, Merge `<y>` in
 > `<owner/repository>` using the Work adapter. Re-resolve the current plan and
-> implementation PR, then run the mandatory qualification campaign for the
-> recorded class. Fix ordinary findings and update the PR autonomously. Do not
-> return routine fixes to Chat. Stop only for a human gate, capability blocker,
-> or completed qualification. Do not merge.
+> active PR. For a planning-phase handoff, finish the planning PR `update-pr`
+> convergence loop and stop at the human planning-merge gate. For an
+> implementation handoff, run the mandatory qualification campaign for the
+> recorded class. Fix ordinary findings and update the active PR autonomously. Do
+> not return routine fixes to Chat. Stop only for a human gate, capability
+> blocker, or completed qualification. Do not merge.
 
 ### Starting directly in Work
 

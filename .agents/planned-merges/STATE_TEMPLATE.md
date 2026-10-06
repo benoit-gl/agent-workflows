@@ -92,6 +92,8 @@ PR-content change.
 - Environment history:
 - Chat-to-Work transitions:
 - One-transition target met:
+- Handoff phase: `planning repair` or `implementation`
+- Active handoff PR/head:
 - Handoff-ready criteria:
 - Exact handoff content identity:
 - Resume action:

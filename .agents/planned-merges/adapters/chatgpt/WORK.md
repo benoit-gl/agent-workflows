@@ -7,6 +7,14 @@ Work supports readiness assessment, planning edits, implementation, verification
 and final qualification. Use the local checkout and shell when available, and use
 the PR-review Work adapter for authoritative remote delivery and check evidence.
 
+## Planning PR handoff
+
+If Work receives a planning-phase handoff, re-resolve the planning PR and head,
+complete the missing convergence capability, and resume the PR review workflow in
+`update-pr` mode until the planning PR converges. Then stop at the human
+planning-merge gate. Do not start implementation or qualification before the
+revised plan lands.
+
 ## Verification and qualification campaign
 
 Once Work starts because a required convergence capability or qualification
