@@ -89,6 +89,7 @@ or `not applicable`, with evidence; baseline success does not verify later edits
 - Remote base/head re-resolved immediately before delivery:
 - Delivery route and ref advancement performed:
 - Current remote PR head:
+- PR description checked/updated:
 - Authoritative remote check target:
 - PR metadata/state changes:
 - Required checks on authoritative target:

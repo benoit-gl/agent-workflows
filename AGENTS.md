@@ -25,4 +25,12 @@ For an iterative PR review or the repository review protocol, read and follow
 roles, governance discovery, verification, and completion rules, including its
 specific concurrency and fresh-review requirements.
 
+## Planned merge points
+
+For a planned merge-point lifecycle, read and follow
+[the planned merge workflow](.agents/planned-merges/WORKFLOW.md). It owns
+readiness assessment, plan repair, scope-drift handling, implementation
+orchestration, qualification classes, and environment handoffs. It uses the PR
+review workflow for each PR convergence loop instead of replacing it.
+
 For changes to this repository, follow [CONTRIBUTING.md](CONTRIBUTING.md).

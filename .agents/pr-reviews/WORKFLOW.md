@@ -60,9 +60,17 @@ Record one delivery mode before review work begins:
   `update-pr` only when remote delivery is explicit.
 - A prohibition such as "do not merge" does not by itself authorize commits or
   remote delivery.
-- Approval for remote delivery does not authorize force-updating, approval,
-  closing, enabling auto-merge, changing draft/ready-for-review status, labels,
-  milestones, base branch, or other PR metadata.
+- `update-pr` includes narrow authority to maintain the existing PR description
+  when the final accepted content makes it materially inaccurate or incomplete,
+  or when applicable repository policy requires the description to track the
+  final change. The update may summarize only accepted current content and
+  durable intent; it must not introduce new requirements, decisions, temporary
+  review status, or unsupported verification claims. Preserve accurate existing
+  context, links, issue references, checklists, and attribution when possible.
+- Remote delivery does not authorize force-updating, approval, closing, enabling
+  auto-merge, changing the PR title, draft/ready-for-review status, labels,
+  reviewers, assignees, milestones, base branch, maintainer permissions, or other
+  PR metadata.
 - This workflow never merges a PR. Merge remains a separate user or repository
   operation outside these delivery modes.
 - If the requested loop requires a write or remote action whose mode is unclear,
@@ -286,10 +294,11 @@ The coordinator must validate and deduplicate findings before any edit.
 Apply commit steps only when commit authority is explicit. Apply remote delivery
 and verification steps only to `update-pr`.
 
-For `update-pr` with no changes to deliver, skip commit/delivery and record the
-unchanged reviewed head as the delivery revision. Still perform final remote verification.
-Local pre-delivery checks and required post-delivery CI are distinct gates; neither
-substitutes for the other.
+For `update-pr` with no source changes to deliver, skip commit/delivery and
+record the unchanged reviewed head as the delivery revision. A stale PR
+description can still require the narrow metadata write authorized in section
+1.1. Still perform final remote verification. Local pre-delivery checks and
+required post-delivery CI are distinct gates; neither substitutes for the other.
 
 1. After candidate verification, policy audit, and fresh re-review succeed,
    create one scoped commit through the selected delivery route when authorized.
@@ -309,15 +318,24 @@ substitutes for the other.
    that SHA and that prohibited PR state did not change. Re-resolve the current
    base and head before final remote verification.
    If a write response is uncertain, inspect remote state before retrying.
-6. Determine the authoritative required-check target from current host and
+6. Compare the current PR description with the final accepted change and
+   applicable repository policy. If it is materially inaccurate or incomplete,
+   update only the description under the authority in section 1.1. Prefer the
+   smallest edit that restores accuracy. Re-read PR metadata after the write and
+   confirm that the title, lifecycle state, base, and other prohibited metadata
+   did not change. A description-only update does not invalidate source-content
+   review or CI evidence. If repository policy requires an accurate description
+   and the available route cannot update it, record completion as blocked.
+7. Determine the authoritative required-check target from current host and
    repository metadata. Do not assume required checks attach to the PR head SHA;
    for example, GitHub checks can apply to a current PR test-merge or merge-queue
    revision. Record the exact target and wait for its required checks. Triage
    failures; do not substitute a local check for a required remote check.
    Unknown check requirements or targets block completion. An empty run list is
    not proof of success; record authoritative evidence when no checks are required.
-7. `update-pr` stops with an updated, verified PR. It never approves, changes PR
-   lifecycle state, enables auto-merge, or merges.
+8. `update-pr` stops with an updated, verified PR and an accurate PR description
+   when the applicable policy or final accepted change requires one. It never
+   approves, changes PR lifecycle state, enables auto-merge, or merges.
 
 ## 7. Stop conditions
 

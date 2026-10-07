@@ -1,0 +1,34 @@
+# ChatGPT Chat Planned Merge Adapter
+
+Load [BOOTSTRAP.md](BOOTSTRAP.md) from the same workflow revision and pair this
+adapter with the existing PR-review Chat adapter.
+
+Chat supports readiness assessment, planning edits, implementation, PR updates,
+verification, and provisional convergence when the available repository tools are
+sufficient. Repository and PR delivery follows the PR-review Chat adapter.
+
+## Convergence and qualification handoff
+
+If a planning PR cannot converge because a required PR-review capability is
+unavailable in Chat but available in Work, complete all other Chat-capable review
+and verification, then prepare a planning-phase handoff with the planning PR and
+head, the remaining blocker, and the exact resume action. Do not require an
+implementation PR or qualification class. Work resumes the planning PR review and
+stops as **awaiting human planning merge**.
+
+Q2 and above require Work and a fresh Standard-tier whole-PR qualification. Q3
+adds Strong targeted review. Q4 adds Frontier targeted reconciliation. When Work
+is required, complete the handoff checkpoint with the exact plan and PR identity,
+class triggers, completed verification, remaining mandatory reviews, and resume
+action.
+
+If Chat has established provisional convergence, a merge point that requires
+Work remains provisionally converged, not qualified, until that campaign is
+complete. If a Work-only convergence capability prevents provisional
+convergence, complete all other Chat-capable review and fixing, then hand off
+with convergence explicitly blocked on that capability. This includes a required
+fresh reviewer context when Chat cannot provide one. Do not mark the PR converged
+in Chat.
+
+When the checkpoint is complete and the only next step is the manual switch to
+Work, record **awaiting required environment handoff**.
