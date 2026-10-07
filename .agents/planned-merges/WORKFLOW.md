@@ -82,6 +82,8 @@ authorities. Unless the user explicitly restricts them, each includes creating o
 reusing a dedicated branch, committing only phase-scoped changes, creating a
 draft PR when needed, and updating that PR through the inner `update-pr`
 workflow. This avoids a separate approval stop for routine delivery mechanics.
+An unrestricted implementation request also authorizes necessary, unambiguous,
+non-substantial plan repair through the planning-PR process in section 3.
 
 Qualification authority is narrower. When the requested phase is qualification
 of an existing implementation PR, it includes routine qualification fixes, scoped
