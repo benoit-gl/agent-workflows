@@ -232,7 +232,6 @@ Additional mandatory promotions:
   weaken PR-review convergence by treating the unavailable verification as passed.
 - If a newly accepted finding introduces a Q2, Q3, or Q4 trigger, immediately
   raise the class before further qualification.
-
 For Q2 and above, "fresh" means a fresh reviewer context under the PR review
 workflow's fresh-review rules. A same-context surrogate can support investigation,
 but it cannot satisfy the mandatory qualification. The fresh Work review is
@@ -248,6 +247,9 @@ PR review at the higher tier.
 
 Chat and Work are execution environments, not lifecycle phases. Either can
 perform readiness work, plan repair, implementation, fixing, or verification.
+
+When a run starts in Work, continue in Work. Do not move to Chat only to follow
+the lower-cost default.
 
 When both are available, the default orchestration is:
 

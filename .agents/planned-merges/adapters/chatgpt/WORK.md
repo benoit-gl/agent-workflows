@@ -7,6 +7,9 @@ Work supports readiness assessment, planning edits, implementation, verification
 and final qualification. Use the local checkout and shell when available, and use
 the PR-review Work adapter for authoritative remote delivery and check evidence.
 
+When the invocation already selects Work, continue in Work. Do not introduce a
+Chat handoff solely to follow the lower-cost default.
+
 ## Planning PR handoff
 
 If Work receives a planning-phase handoff, re-resolve the planning PR and head,
