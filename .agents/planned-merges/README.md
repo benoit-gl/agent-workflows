@@ -195,26 +195,29 @@ and adapters from that same commit.
 > unambiguous repair and planning edits are authorized, create a documentation
 > draft PR and run `update-pr` toward convergence. If that planning PR is blocked
 > only by a required capability available in Work, hand it off as the active PR;
-> do not require an implementation PR or qualification class. Otherwise stop at
-> the human planning-merge gate when it converges. If no plan repair is needed,
+> do not require an implementation PR or qualification class. Otherwise stop as
+> `awaiting human planning merge` when it converges. If no plan repair is needed,
 > implement the ready merge point, create a draft implementation PR, and run
 > `update-pr` toward provisional convergence. If a required implementation
 > convergence capability exists only in Work, including a required fresh reviewer
 > context, complete all other Chat-capable convergence work and record that
-> blocker in the handoff instead of treating it as passed. Stop for a human gate
-> or capability blocker. If Work qualification is required, stop only when the
-> Work handoff is complete and ready.
+> blocker in the handoff instead of treating it as passed. Stop as
+> `awaiting human decision or approval` or `blocked on required capability`
+> when either state applies. If Work qualification is required, stop only as
+> `awaiting required environment handoff` when the Work handoff is complete and
+> ready.
 
 ### Typical Work handoff invocation
 
 > Continue the planned merge-point workflow for Step `<x>`, Merge `<y>` in
 > `<owner/repository>` using the Work adapter. Re-resolve the current plan and
 > active PR. For a planning-phase handoff, finish the planning PR `update-pr`
-> convergence loop and stop at the human planning-merge gate. For an
+> convergence loop and stop as `awaiting human planning merge`. For an
 > implementation handoff, run the mandatory qualification campaign for the
 > recorded class. Fix ordinary findings and update the active PR autonomously. Do
-> not return routine fixes to Chat. Stop only for a human gate, capability
-> blocker, or completed qualification. Do not merge.
+> not return routine fixes to Chat. Stop only in the applicable canonical terminal
+> state: `awaiting human decision or approval`, `blocked on required
+> capability`, or `ready for human implementation merge`. Do not merge.
 
 ### Starting directly in Work
 

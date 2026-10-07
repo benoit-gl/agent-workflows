@@ -14,7 +14,7 @@ unavailable in Chat but available in Work, complete all other Chat-capable revie
 and verification, then prepare a planning-phase handoff with the planning PR and
 head, the remaining blocker, and the exact resume action. Do not require an
 implementation PR or qualification class. Work resumes the planning PR review and
-stops at the human planning-merge gate.
+stops as **awaiting human planning merge**.
 
 Q2 and above require Work and a fresh Standard-tier whole-PR qualification. Q3
 adds Strong targeted review. Q4 adds Frontier targeted reconciliation. When Work
@@ -31,5 +31,4 @@ fresh reviewer context when Chat cannot provide one. Do not mark the PR converge
 in Chat.
 
 When the checkpoint is complete and the only next step is the manual switch to
-Work, record an environment handoff rather than a human gate or capability
-blocker.
+Work, record **awaiting required environment handoff**.

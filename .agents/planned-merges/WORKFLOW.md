@@ -121,9 +121,9 @@ this autonomous repair path for a substantial plan or scope change or for an
 irreversible or destructive choice that requires approval; those remain human
 gates. If more than one materially different valid resolution remains under the
 core definition, do not choose among them. If the requested work must resolve the
-choice to continue, stop at a human gate and obtain user direction. An
-assessment-only request can instead complete with readiness not established and
-record the unresolved choice for any later phase.
+choice to continue, stop as **awaiting human decision or approval** and obtain
+user direction. An assessment-only request can instead complete with readiness
+not established and record the unresolved choice for any later phase.
 
 When planning edits are authorized, the normal planning branch, scoped-commit,
 draft-PR, and existing-PR update lifecycle is authorized unless the user
@@ -134,14 +134,14 @@ explicitly restricts it:
    executable evidence for the planning decision.
 3. Run the PR review workflow in `update-pr` mode until that planning PR
    converges.
-4. Stop at the human merge gate.
+4. Stop as **awaiting human planning merge**.
 
 If that planning PR cannot converge in Chat because a required PR-review
 capability is available only in Work, use the section 7 environment handoff with
 the planning PR as the active PR. Work completes the missing capability, resumes
-the inner PR-review loop to convergence, and then stops at the human planning
-merge gate. Do not require an implementation PR or qualification state for this
-planning-phase handoff.
+the inner PR-review loop to convergence, and then stops as **awaiting human
+planning merge**. Do not require an implementation PR or qualification state for
+this planning-phase handoff.
 
 After the planning PR is merged, resume from the new target-branch state and run
 the readiness gate again. Do not let an implementation branch silently depend on
@@ -191,7 +191,7 @@ implementation details already determined by the accepted contracts remain
 inside the current merge point.
 
 If plan repair is required, preserve the implementation PR safely, create the
-planning PR, and stop at the human planning-merge gate. Resume implementation
+planning PR, and stop as **awaiting human planning merge**. Resume implementation
 only after the revised plan lands.
 
 ## 6. Assign an objective qualification class
@@ -279,9 +279,9 @@ convergence capability requires it.
 
 If Work receives a planning-phase handoff, re-resolve the planning PR, complete
 the missing convergence capability, and resume the PR review workflow in
-`update-pr` mode until the planning PR converges. Then stop at the human planning
-merge gate. Do not require implementation qualification state and do not start
-implementation before the revised plan lands.
+`update-pr` mode until the planning PR converges. Then stop as **awaiting human
+planning merge**. Do not require implementation qualification state and do not
+start implementation before the revised plan lands.
 
 The remaining campaign applies to implementation PRs. Once an implementation PR
 enters Work because a required convergence capability or qualification requires
@@ -319,18 +319,23 @@ Within Work:
 Routine fixing, tests, comments, documentation propagation, and another review
 round are not reasons to stop or return to Chat.
 
-Stop the autonomous Work campaign only for one of these reasons:
+Stop the autonomous Work campaign only in a canonical terminal state that
+applies to the active phase:
 
-- **Human gate:** a materially different valid choice is unresolved by repository
-  authority; scope drift requires a substantial plan or scope change; an
-  irreversible or destructive choice requires explicit approval; or a planning
-  or final merge requires human authority.
-- **Capability blocker:** a required capability is unavailable.
-- **Completed qualification:** qualification is complete and the PR is ready for
-  human acceptance and merge.
+- **awaiting human decision or approval** when a materially different valid
+  choice is unresolved by repository authority, scope drift requires a
+  substantial plan or scope change, or an irreversible or destructive choice
+  requires explicit approval;
+- **awaiting human planning merge** when a planning PR has converged and requires
+  human merge authority;
+- **blocked on required capability** when a required capability is unavailable;
+  or
+- **ready for human implementation merge** when qualification is current, the
+  required remote checks pass, no material decision is pending, and the PR
+  accurately represents the accepted merge point.
 
-Do not report a capability blocker as a pending human decision unless the human
-must choose how to resolve it.
+Do not report **blocked on required capability** as a pending human decision
+unless the human must choose how to resolve it.
 
 The Work adapter must not spend Strong or Frontier capacity merely because the
 current agent thinks more intelligence could help. Higher tiers are used when

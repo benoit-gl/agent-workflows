@@ -11,16 +11,15 @@ the PR-review Work adapter for authoritative remote delivery and check evidence.
 
 If Work receives a planning-phase handoff, re-resolve the planning PR and head,
 complete the missing convergence capability, and resume the PR review workflow in
-`update-pr` mode until the planning PR converges. Then stop at the human
-planning-merge gate. Do not start implementation or qualification before the
-revised plan lands.
+`update-pr` mode until the planning PR converges. Then stop as **awaiting human
+planning merge**. Do not start implementation or qualification before the revised
+plan lands.
 
 ## Verification and qualification campaign
 
 Once Work starts because a required convergence capability or qualification
-requires it, keep routine fixing, verification, and re-review in Work until
-qualification completes or the canonical workflow reaches a human gate or
-capability blocker.
+requires it, keep routine fixing, verification, and re-review in Work until the
+canonical workflow reaches one of its terminal states.
 
 If the handoff arrived before provisional convergence because a required
 capability exists only in Work, complete that capability and resume the PR review
