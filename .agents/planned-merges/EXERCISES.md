@@ -320,4 +320,3 @@ Expected behavior:
 - keep merge, force-update, PR lifecycle-state changes, and unrelated metadata
   outside qualification authority; and
 - obey any explicit restriction on the otherwise authorized qualification writes.
-
