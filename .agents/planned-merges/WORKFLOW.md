@@ -34,6 +34,11 @@ Those repetitions add local context; they do not weaken or redefine the rules.
   unavailable evidence as passed.
 - After a Chat-to-Work handoff, stay in Work for routine fixing, verification,
   and re-review until qualification completes or a stop condition occurs.
+- Authorizing planning edits or implementation authorizes the routine repository
+  mechanics needed to carry that phase through a dedicated branch, scoped
+  commits, a draft PR, and `update-pr` updates to that PR, unless the user
+  explicitly restricts one of those actions. It does not authorize merge,
+  force-update, PR lifecycle-state changes, or unrelated metadata changes.
 - Human gates require human judgment or authority and are limited to materially
   different valid choices not settled by repository authority, substantial plan
   or scope changes, irreversible or destructive approval, and planning or final
@@ -60,16 +65,24 @@ Record:
 
 - target repository and base branch;
 - the exact planned merge point and governing plan revision;
-- requested work authority, including whether planning edits, implementation,
-  commits, new draft PRs, and updates to existing PRs are authorized;
+- requested phase/work authority and any explicit restrictions on the normal
+  branch, commit, draft-PR, and existing-PR update mechanics for that phase;
 - prohibited actions, especially merge and force-update;
 - current execution environment;
 - current plan PR or implementation PR, if one exists; and
 - prior accepted user decisions that materially constrain the merge point.
 
-Do not infer stronger write authority from a request to assess readiness. Do not
-merge either a planning PR or implementation PR unless the user separately asks
-for that merge.
+Planning-edit authority and implementation authority are umbrella phase
+authorities. Unless the user explicitly restricts them, each includes creating or
+reusing a dedicated branch, committing only phase-scoped changes, creating a
+draft PR when needed, and updating that PR through the inner `update-pr`
+workflow. This avoids a separate approval stop for routine delivery mechanics.
+Assessment or readiness-only authority does not include those writes.
+
+Do not infer planning or implementation authority from a request to assess
+readiness. Phase authority never implies merge, force-update, PR
+ready-for-review changes, or unrelated PR metadata changes. Do not merge either a
+planning PR or implementation PR unless the user separately asks for that merge.
 
 Use [STATE_TEMPLATE.md](STATE_TEMPLATE.md) as the durable control record. Keep
 temporary state out of the target repository unless the user explicitly asks to
@@ -112,7 +125,9 @@ choice to continue, stop at a human gate and obtain user direction. An
 assessment-only request can instead complete with readiness not established and
 record the unresolved choice for any later phase.
 
-When planning edits are authorized:
+When planning edits are authorized, the normal planning branch, scoped-commit,
+draft-PR, and existing-PR update lifecycle is authorized unless the user
+explicitly restricts it:
 
 1. Create or update a dedicated planning branch and draft PR.
 2. Keep the change documentation-only unless the repository explicitly requires
@@ -134,7 +149,9 @@ an unmerged planning change.
 
 ## 4. Implement the ready merge point
 
-When implementation is authorized and the readiness gate passes:
+When implementation is authorized and the readiness gate passes, the normal
+implementation branch, scoped-commit, draft-PR, and existing-PR update lifecycle
+is authorized unless the user explicitly restricts it:
 
 1. Start from the current target branch or the explicitly requested ref.
 2. Create or reuse one dedicated implementation branch.

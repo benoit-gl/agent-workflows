@@ -267,3 +267,40 @@ Expected behavior:
   `update-pr` loop to convergence;
 - stop at the human planning-merge gate after that convergence; and
 - do not start implementation before the revised plan lands.
+
+
+## 19. Phase authority includes routine delivery mechanics
+
+The user asks the agent to implement a ready merge point. The user does not
+separately mention branch creation, commits, a draft PR, or updates to that PR.
+
+Expected behavior:
+
+- treat implementation authority as including the normal dedicated-branch,
+  scoped-commit, draft-PR, and `update-pr` lifecycle;
+- do not stop for separate approval before each routine delivery operation;
+- keep merge, force-update, PR lifecycle-state changes, and unrelated metadata
+  outside that umbrella authority; and
+- obey any explicit restriction on one of the otherwise implied operations.
+
+Variant: the user asks only for readiness assessment. Expected: do not infer any
+planning, implementation, branch, commit, or PR-write authority.
+
+## 20. Record canonical terminal states
+
+Exercise the main stop paths: complete a readiness-only request, reach an
+unresolved material decision, converge a planning PR, prepare a required Work
+handoff, encounter a required unavailable capability, and fully qualify an
+implementation PR with current required checks passing.
+
+Expected behavior:
+
+- record the stop category using the workflow's exact canonical state for each
+  path;
+- use `ready for human implementation merge` only when qualification and remote
+  verification are both current;
+- use `awaiting human planning merge` for a converged planning PR;
+- do not collapse these states into generic labels such as `human gate`,
+  `environment handoff`, `capability blocker`, or
+  `completed qualification`; and
+- preserve the exact next human or executable action in the state record.

@@ -108,6 +108,23 @@ permission to implement. An unresolved choice that matters only to a later,
 unrequested phase is recorded for that future work; it becomes a human gate only
 when the active requested work must cross it.
 
+### Phase authority versus operation-by-operation approval
+
+Once the user authorizes plan repair or implementation, the workflow treats the
+routine repository mechanics of that phase as part of the same authority. This
+includes the dedicated branch, scoped commits, draft PR creation, and updates to
+that PR through the inner review workflow unless the user explicitly restricts
+one of those actions.
+
+Requiring a new approval for each routine delivery operation would create manual
+stalls without adding a meaningful design or safety decision. Explicit
+restrictions still win, and destructive or lifecycle-changing operations remain
+outside the umbrella: merge, force-update, ready-for-review changes, and unrelated
+PR metadata still require their own authority.
+
+Readiness-only work does not receive this umbrella authority because assessment
+does not imply permission to modify the repository.
+
 ### Convergence versus qualification
 
 A PR can converge under the PR review workflow and still require stronger

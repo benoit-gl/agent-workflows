@@ -12,7 +12,7 @@ logs into it.
 - Planned merge point:
 - Governing plan path/revision:
 - Requested phase/work:
-- Authorized writes:
+- Phase authority and explicit write restrictions:
 - Forbidden actions:
 - Current environment:
 - State last checked against revision:
@@ -104,8 +104,10 @@ PR-content change.
 - Current stage:
 - Task status:
 - Requested phase completion result:
-- Stop category: `none`, `requested phase complete`, `human gate`,
-  `environment handoff`, `capability blocker`, or `completed qualification`
+- Stop category: `none`, `requested phase complete`,
+  `awaiting human decision or approval`, `awaiting human planning merge`,
+  `awaiting required environment handoff`, `blocked on required capability`,
+  or `ready for human implementation merge`
 - Pending human decision or approval, if any:
 - Next executable action:
 - Next human action, if any:
