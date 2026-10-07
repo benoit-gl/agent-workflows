@@ -56,7 +56,7 @@ Expected behavior:
 - treat this as scope drift;
 - stop absorbing the work into the implementation PR;
 - revise or split the plan through a planning PR; and
-- stop at the human planning-merge gate before resuming implementation.
+- stop as `awaiting human planning merge` before resuming implementation.
 
 ## 5. Q3 promotion after review findings
 
@@ -248,8 +248,8 @@ Expected behavior:
 
 Variant: readiness fails because two materially different repairs are possible.
 Expected: report the merge point as not ready and the future choice explicitly.
-Use a human gate only if the current requested work must resolve that choice to
-continue.
+Stop as `awaiting human decision or approval` only if the current requested
+work must resolve that choice to continue.
 
 ## 18. Planning PR needs a Work-only convergence capability
 
@@ -265,7 +265,7 @@ Expected behavior:
 - do not require an implementation PR or qualification class for the handoff;
 - in Work, complete the missing capability and resume the planning PR
   `update-pr` loop to convergence;
-- stop at the human planning-merge gate after that convergence; and
+- stop as `awaiting human planning merge` after that convergence; and
 - do not start implementation before the revised plan lands.
 
 

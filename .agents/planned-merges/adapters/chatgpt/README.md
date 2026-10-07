@@ -42,7 +42,7 @@ and stop without claiming qualification.
 ## Work entry
 
 Work can execute every phase. For a planning-phase handoff, finish the planning
-PR convergence loop and stop at the human planning-merge gate before
+PR convergence loop and stop as `awaiting human planning merge` before
 implementation. For an implementation handoff, once Work starts because a
 required convergence capability or qualification requires it, keep the merge
 point in Work through routine fixing, verification, and re-review until
