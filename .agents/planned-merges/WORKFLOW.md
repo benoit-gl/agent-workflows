@@ -37,8 +37,12 @@ Those repetitions add local context; they do not weaken or redefine the rules.
 - Authorizing planning edits or implementation authorizes the routine repository
   mechanics needed to carry that phase through a dedicated branch, scoped
   commits, a draft PR, and `update-pr` updates to that PR, unless the user
-  explicitly restricts one of those actions. It does not authorize merge,
-  force-update, PR lifecycle-state changes, or unrelated metadata changes.
+  explicitly restricts one of those actions. Authorizing qualification of an
+  existing implementation PR authorizes routine qualification fixes, scoped
+  commits, and `update-pr` updates to that existing PR. Qualification-only
+  authority does not authorize creating a new implementation branch or PR.
+  None of these phase authorities authorize merge, force-update, PR
+  lifecycle-state changes, or unrelated metadata changes.
 - Human gates require human judgment or authority and are limited to materially
   different valid choices not settled by repository authority, substantial plan
   or scope changes, irreversible or destructive approval, and planning or final
@@ -65,8 +69,9 @@ Record:
 
 - target repository and base branch;
 - the exact planned merge point and governing plan revision;
-- requested phase/work authority and any explicit restrictions on the normal
-  branch, commit, draft-PR, and existing-PR update mechanics for that phase;
+- requested phase/work authority and any explicit restrictions on its normal
+  repository mechanics, including branch or PR creation and existing-PR updates
+  where applicable;
 - prohibited actions, especially merge and force-update;
 - current execution environment;
 - current plan PR or implementation PR, if one exists; and
@@ -77,12 +82,18 @@ authorities. Unless the user explicitly restricts them, each includes creating o
 reusing a dedicated branch, committing only phase-scoped changes, creating a
 draft PR when needed, and updating that PR through the inner `update-pr`
 workflow. This avoids a separate approval stop for routine delivery mechanics.
-Assessment or readiness-only authority does not include those writes.
+
+Qualification authority is narrower. When the requested phase is qualification
+of an existing implementation PR, it includes routine qualification fixes, scoped
+commits, and `update-pr` updates to that existing PR unless the user explicitly
+restricts them. It does not authorize creating a new implementation branch or PR.
+Assessment or readiness-only authority does not include repository writes.
 
 Do not infer planning or implementation authority from a request to assess
-readiness. Phase authority never implies merge, force-update, PR
-ready-for-review changes, or unrelated PR metadata changes. Do not merge either a
-planning PR or implementation PR unless the user separately asks for that merge.
+readiness, and do not infer implementation authority from a qualification-only
+request. Phase authority never implies merge, force-update, PR ready-for-review
+changes, or unrelated PR metadata changes. Do not merge either a planning PR or
+implementation PR unless the user separately asks for that merge.
 
 Use [STATE_TEMPLATE.md](STATE_TEMPLATE.md) as the durable control record. Keep
 temporary state out of the target repository unless the user explicitly asks to
@@ -283,10 +294,13 @@ the missing convergence capability, and resume the PR review workflow in
 planning merge**. Do not require implementation qualification state and do not
 start implementation before the revised plan lands.
 
-The remaining campaign applies to implementation PRs. Once an implementation PR
-enters Work because a required convergence capability or qualification requires
-it, Work owns the rest of the autonomous campaign. Do not send routine findings
-back to Chat to save compute.
+The remaining campaign applies to implementation PRs. When qualification is the
+requested phase for an existing implementation PR, use the qualification authority
+from section 1 for routine fixes, scoped commits, and `update-pr` updates to that
+PR. Do not create a new implementation branch or PR under qualification-only
+authority. Once an implementation PR enters Work because a required convergence
+capability or qualification requires it, Work owns the rest of the autonomous
+campaign. Do not send routine findings back to Chat to save compute.
 
 Within Work:
 

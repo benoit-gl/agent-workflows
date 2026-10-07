@@ -116,14 +116,19 @@ includes the dedicated branch, scoped commits, draft PR creation, and updates to
 that PR through the inner review workflow unless the user explicitly restricts
 one of those actions.
 
-Requiring a new approval for each routine delivery operation would create manual
-stalls without adding a meaningful design or safety decision. Explicit
-restrictions still win, and destructive or lifecycle-changing operations remain
-outside the umbrella: merge, force-update, ready-for-review changes, and unrelated
-PR metadata still require their own authority.
+Qualification-only authority is deliberately narrower. A request to qualify an
+existing implementation PR includes routine qualification fixes, scoped commits,
+and updates to that existing PR through the inner review workflow. It does not
+authorize creating a new implementation branch or PR.
 
-Readiness-only work does not receive this umbrella authority because assessment
-does not imply permission to modify the repository.
+Requiring a new approval for each routine authorized operation would create
+manual stalls without adding a meaningful design or safety decision. Explicit
+restrictions still win, and destructive or lifecycle-changing operations remain
+outside these authorities: merge, force-update, ready-for-review changes, and
+unrelated PR metadata still require their own authority.
+
+Readiness-only work does not receive write authority because assessment does not
+imply permission to modify the repository.
 
 ### Convergence versus qualification
 

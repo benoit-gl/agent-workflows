@@ -59,14 +59,16 @@ review is recorded for both instead of being repeated.
 
 Q2 and above require Work and a fresh Standard-tier whole-PR qualification. Q3
 adds Strong targeted review, and Q4 adds Frontier targeted reconciliation.
-Qualification classes never decrease. Human gates require human judgment or
-authority and are limited to materially different valid choices not settled by
-repository authority, substantial plan or scope changes, irreversible or
-destructive approval, and planning or final merges. Completing an explicitly
-requested phase is normal task completion; lack of authority for an unrequested
-later phase is not by itself a human gate. Manual environment handoffs and
-unavailable capabilities are operational stops, not by themselves human
-decisions.
+Qualification classes never decrease. A standalone qualification request can
+apply routine fixes, scoped commits, and `update-pr` updates to an existing
+implementation PR, but it does not authorize creating a new implementation branch
+or PR. Human gates require human judgment or authority and are limited to
+materially different valid choices not settled by repository authority,
+substantial plan or scope changes, irreversible or destructive approval, and
+planning or final merges. Completing an explicitly requested phase is normal task
+completion; lack of authority for an unrequested later phase is not by itself a
+human gate. Manual environment handoffs and unavailable capabilities are
+operational stops, not by themselves human decisions.
 
 - [Invocation examples](.agents/planned-merges/README.md)
 - [Workflow state template](.agents/planned-merges/STATE_TEMPLATE.md)

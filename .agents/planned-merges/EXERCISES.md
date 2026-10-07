@@ -303,3 +303,21 @@ Expected behavior:
   `environment handoff`, `capability blocker`, or
   `completed qualification`; and
 - preserve the exact next human or executable action in the state record.
+
+## 21. Standalone qualification authority
+
+An existing implementation PR has reached provisional convergence. The user asks
+only to qualify that merge point and does not separately grant implementation
+authority.
+
+Expected behavior:
+
+- treat qualification authority as sufficient for routine qualification fixes,
+  scoped commits, and `update-pr` updates to that existing implementation PR;
+- do not stop for separate approval before those routine qualification writes;
+- do not create a new implementation branch or PR under qualification-only
+  authority;
+- keep merge, force-update, PR lifecycle-state changes, and unrelated metadata
+  outside qualification authority; and
+- obey any explicit restriction on the otherwise authorized qualification writes.
+

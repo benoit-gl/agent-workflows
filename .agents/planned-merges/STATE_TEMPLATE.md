@@ -13,6 +13,7 @@ logs into it.
 - Governing plan path/revision:
 - Requested phase/work:
 - Phase authority and explicit write restrictions:
+- Qualification-only existing implementation PR, if applicable:
 - Forbidden actions:
 - Current environment:
 - State last checked against revision:
