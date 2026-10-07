@@ -215,9 +215,10 @@ and adapters from that same commit.
 > convergence loop and stop as `awaiting human planning merge`. For an
 > implementation handoff, run the mandatory qualification campaign for the
 > recorded class. Fix ordinary findings and update the active PR autonomously. Do
-> not return routine fixes to Chat. Stop only in the applicable canonical terminal
-> state: `awaiting human decision or approval`, `blocked on required
-> capability`, or `ready for human implementation merge`. Do not merge.
+> not return routine fixes to Chat. Stop only in the applicable canonical
+> terminal state: `awaiting human decision or approval`,
+> `blocked on required capability`, or `ready for human implementation merge`.
+> Do not merge.
 
 ### Starting directly in Work
 

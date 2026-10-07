@@ -268,7 +268,6 @@ Expected behavior:
 - stop as `awaiting human planning merge` after that convergence; and
 - do not start implementation before the revised plan lands.
 
-
 ## 19. Phase authority includes routine delivery mechanics
 
 The user asks the agent to implement a ready merge point. The user does not
