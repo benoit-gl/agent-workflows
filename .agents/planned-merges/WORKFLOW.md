@@ -21,6 +21,13 @@ These rules are normative. Later sections repeat them at the point of action.
 Those repetitions add local context; they do not weaken or redefine the rules.
 
 - Qualification classes are monotonic: they can only increase during a run.
+- Use the least costly path that preserves required evidence and independence.
+  Plan expensive work around its prerequisites and preserve resumable state in
+  available durable storage. Reuse evidence only when its scope, content,
+  independence, and applicable gate permit it; repeat invalidated work and
+  any separately required checks or fresh reviews. Authoritative checks may
+  satisfy verification only where repository policy and the applicable gate
+  allow it. Never reduce required review or verification to save cost.
 - Q2 and above require Work and a fresh Standard-tier whole-PR qualification in
   a fresh reviewer context. A same-context surrogate cannot satisfy this
   qualification.
