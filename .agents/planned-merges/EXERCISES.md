@@ -320,3 +320,22 @@ Expected behavior:
 - keep merge, force-update, PR lifecycle-state changes, and unrelated metadata
   outside qualification authority; and
 - obey any explicit restriction on the otherwise authorized qualification writes.
+
+## 22. Reuse evidence without weakening gates
+
+A merge point requires an expensive comparative measurement and Q2 qualification.
+The fixture design and oracle can be checked before the final measurement. After
+a valid measurement, one review round changes only explanatory prose; a later
+round changes the measured operation.
+
+Expected behavior:
+
+- plan the costly measurement around the fixture and oracle prerequisites;
+- retain the measurement after the prose change only if its inputs and evidence
+  contract remain applicable, while still performing any required fresh review
+  of the changed PR;
+- rerun affected measurements after the operation changes;
+- use an authoritative check in place of other verification only when repository
+  policy and the applicable gate permit it; and
+- never reuse evidence with insufficient scope, independence, content identity,
+  or freshness merely to save cost.
